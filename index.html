@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cake Atelier — Handcrafted Luxury Cakes</title>
+  <meta name="description" content="Handcrafted luxury cakes for celebrations that deserve something extraordinary. Made with love, remembered forever.">
+  <meta property="og:title" content="Cake Atelier — Handcrafted Luxury Cakes">
+  <meta property="og:description" content="Handcrafted luxury cakes for celebrations that deserve something extraordinary.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#35221E">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Custom Luxury Cursor -->
+  <div class="custom-cursor" aria-hidden="true">
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring">
+      <span class="cursor-text"></span>
+    </div>
+  </div>
+
+  <!-- Skip Link -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- ═══════════════════════════════════════════════
+       NAVIGATION
+       ═══════════════════════════════════════════════ -->
+  <nav class="nav" aria-label="Main navigation">
+    <div class="nav__inner">
+      <a href="#" class="nav__logo" aria-label="Cake Atelier — Home">Cake <span>Atelier</span></a>
+      <ul class="nav__links" role="list">
+        <li><a href="#creations" class="nav__link">Creations</a></li>
+        <li><a href="#process" class="nav__link">Process</a></li>
+        <li><a href="#custom" class="nav__link">Custom</a></li>
+        <li><a href="#testimonials" class="nav__link">Stories</a></li>
+      </ul>
+      <a href="#" class="nav__cta" data-open-order>Order a Cake</a>
+      <button class="nav__menu-btn" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div class="nav__mobile" id="mobile-nav" role="dialog" aria-label="Navigation menu">
+      <a href="#creations">Creations</a>
+      <a href="#process">Process</a>
+      <a href="#custom">Custom</a>
+      <a href="#testimonials">Stories</a>
+      <a href="#" data-open-order>Order a Cake</a>
+    </div>
+  </nav>
+
+  <main id="main">
+
+    <!-- ═══════════════════════════════════════════════
+         HERO
+         ═══════════════════════════════════════════════ -->
+    <section class="hero" aria-label="Welcome">
+      <div class="hero__content">
+        <div class="hero__text">
+          <span class="hero__label">Handcrafted in Small Batches</span>
+          <h1 class="hero__title">Made with <em>love.</em> Remembered forever.</h1>
+          <p class="hero__subtitle">Every cake we create is a work of edible art — crafted by hand from the finest ingredients for celebrations that matter.</p>
+          <div class="hero__actions">
+            <a href="#creations" class="btn btn--primary">Explore Our Creations <span class="btn__arrow" aria-hidden="true">→</span></a>
+            <a href="#" class="btn btn--secondary" data-open-order>Order a Cake</a>
+          </div>
+        </div>
+        <div class="hero__visual">
+          <div class="hero__image-wrap">
+            <img src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=800&q=80&auto=format&fit=crop"
+                 alt="A beautifully decorated luxury chocolate cake with rich ganache layers and elegant chocolate decorations"
+                 width="800" height="1000"
+                 fetchpriority="high">
+          </div>
+          <div class="hero__image-accent" aria-hidden="true"></div>
+        </div>
+      </div>
+      <div class="hero__scroll" aria-hidden="true">
+        <span class="hero__scroll-text">Scroll</span>
+        <div class="hero__scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         THE ART OF BAKING
+         ═══════════════════════════════════════════════ -->
+    <section class="art-section" id="art" aria-label="The Art of Baking">
+      <div class="wrap">
+        <div class="art-section__grid">
+          <div class="art-section__image" data-clip-reveal>
+            <img src="https://images.unsplash.com/photo-1517433670267-08bbd4be890f?w=700&q=80&auto=format&fit=crop"
+                 alt="A pastry chef carefully finishing an artisan cake with precise decoration"
+                 loading="lazy" width="700" height="933">
+          </div>
+          <div class="art-section__content">
+            <span class="art-section__label" data-reveal>Our Philosophy</span>
+            <h2 class="art-section__title" data-reveal data-reveal-delay="1">Not Just Baked. <em>Carefully</em> Created.</h2>
+            <p class="art-section__text" data-reveal data-reveal-delay="2">
+              Every cake begins with an idea and a conversation. We take the time to understand what makes your celebration unique, then craft something that captures that feeling in flavour, texture, and form.
+            </p>
+            <p class="art-section__text" data-reveal data-reveal-delay="3">
+              We source our ingredients from producers we trust — Belgian chocolate, Madagascan vanilla, seasonal fruits from local farms — because the quality of what goes in determines the quality of what comes out.
+            </p>
+            <div class="art-section__detail" data-reveal data-reveal-delay="4">
+              <div class="art-section__detail-item">
+                <div class="art-section__detail-number">12</div>
+                <div class="art-section__detail-label">Years of Craft</div>
+              </div>
+              <div class="art-section__detail-item">
+                <div class="art-section__detail-number">3,000+</div>
+                <div class="art-section__detail-label">Cakes Delivered</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         SIGNATURE CREATIONS
+         ═══════════════════════════════════════════════ -->
+    <section class="creations" id="creations" aria-label="Signature Creations">
+      <div class="wrap">
+        <div class="creations__header">
+          <p class="creations__label" data-reveal>The Collection</p>
+          <h2 class="creations__title" data-reveal data-reveal-delay="1">Signature Creations</h2>
+        </div>
+
+        <!-- Filter Controls -->
+        <div class="creations__filters" role="group" aria-label="Filter cakes by flavor style" data-reveal data-reveal-delay="2">
+          <button class="filter-btn active" data-filter="all">All Creations</button>
+          <button class="filter-btn" data-filter="chocolate">Chocolate & Ganache</button>
+          <button class="filter-btn" data-filter="floral">Botanical & Fruity</button>
+          <button class="filter-btn" data-filter="caramel">Caramel & Praline</button>
+        </div>
+
+        <div class="creations__grid">
+
+          <article class="cake-card" data-category="chocolate" data-reveal tabindex="0" role="button" aria-label="View Midnight Velvet cake details">
+            <div class="cake-card__image">
+              <img src="https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=600&q=80&auto=format&fit=crop"
+                   alt="Midnight Velvet — dark chocolate cake with gold leaf decoration"
+                   loading="lazy" width="600" height="800">
+              <div class="cake-card__overlay">
+                <span class="cake-card__overlay-btn">View Details</span>
+              </div>
+            </div>
+            <div class="cake-card__info">
+              <div>
+                <h3 class="cake-card__name">Midnight Velvet</h3>
+                <p class="cake-card__desc">Dark Chocolate & Espresso</p>
+              </div>
+              <span class="cake-card__price">$85</span>
+            </div>
+          </article>
+
+          <article class="cake-card" data-category="floral" data-reveal data-reveal-delay="1" tabindex="0" role="button" aria-label="View Rose & Pistachio cake details">
+            <div class="cake-card__image">
+              <img src="https://images.unsplash.com/photo-1557979619-445218f326b9?w=600&q=80&auto=format&fit=crop"
+                   alt="Rose & Pistachio — layered pistachio cake with rose petal decoration"
+                   loading="lazy" width="600" height="800">
+              <div class="cake-card__overlay">
+                <span class="cake-card__overlay-btn">View Details</span>
+              </div>
+            </div>
+            <div class="cake-card__info">
+              <div>
+                <h3 class="cake-card__name">Rose & Pistachio</h3>
+                <p class="cake-card__desc">Pistachio & Rosewater</p>
+              </div>
+              <span class="cake-card__price">$78</span>
+            </div>
+          </article>
+
+          <article class="cake-card" data-category="caramel" data-reveal data-reveal-delay="2" tabindex="0" role="button" aria-label="View Caramel Brûlée cake details">
+            <div class="cake-card__image">
+              <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=600&q=80&auto=format&fit=crop"
+                   alt="Caramel Brûlée — vanilla cake with salted caramel and hazelnut topping"
+                   loading="lazy" width="600" height="800">
+              <div class="cake-card__overlay">
+                <span class="cake-card__overlay-btn">View Details</span>
+              </div>
+            </div>
+            <div class="cake-card__info">
+              <div>
+                <h3 class="cake-card__name">Caramel Brûlée</h3>
+                <p class="cake-card__desc">Vanilla & Salted Caramel</p>
+              </div>
+              <span class="cake-card__price">$72</span>
+            </div>
+          </article>
+
+          <article class="cake-card" data-category="floral" data-reveal tabindex="0" role="button" aria-label="View Berry Pavlova cake details">
+            <div class="cake-card__image">
+              <img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=600&q=80&auto=format&fit=crop"
+                   alt="Berry Pavlova — layered pavlova with fresh berries and cream"
+                   loading="lazy" width="600" height="800">
+              <div class="cake-card__overlay">
+                <span class="cake-card__overlay-btn">View Details</span>
+              </div>
+            </div>
+            <div class="cake-card__info">
+              <div>
+                <h3 class="cake-card__name">Berry Pavlova</h3>
+                <p class="cake-card__desc">Meringue & Mixed Berry</p>
+              </div>
+              <span class="cake-card__price">$68</span>
+            </div>
+          </article>
+
+          <article class="cake-card" data-category="floral" data-reveal data-reveal-delay="1" tabindex="0" role="button" aria-label="View Citrus Garden cake details">
+            <div class="cake-card__image">
+              <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=600&q=80&auto=format&fit=crop"
+                   alt="Citrus Garden — delicate layered artisan cake with fresh edible botanicals"
+                   loading="lazy" width="600" height="800">
+              <div class="cake-card__overlay">
+                <span class="cake-card__overlay-btn">View Details</span>
+              </div>
+            </div>
+            <div class="cake-card__info">
+              <div>
+                <h3 class="cake-card__name">Citrus Garden</h3>
+                <p class="cake-card__desc">Lemon, Yuzu & Elderflower</p>
+              </div>
+              <span class="cake-card__price">$75</span>
+            </div>
+          </article>
+
+          <article class="cake-card" data-category="chocolate" data-reveal data-reveal-delay="2" tabindex="0" role="button" aria-label="View Hazelnut Praline cake details">
+            <div class="cake-card__image">
+              <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&q=80&auto=format&fit=crop"
+                   alt="Hazelnut Praline — mirror glazed hazelnut mousse cake"
+                   loading="lazy" width="600" height="800">
+              <div class="cake-card__overlay">
+                <span class="cake-card__overlay-btn">View Details</span>
+              </div>
+            </div>
+            <div class="cake-card__info">
+              <div>
+                <h3 class="cake-card__name">Hazelnut Praline</h3>
+                <p class="cake-card__desc">Hazelnut & Milk Chocolate</p>
+              </div>
+              <span class="cake-card__price">$82</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         THE MAKING PROCESS
+         ═══════════════════════════════════════════════ -->
+    <section class="process" id="process" aria-label="Our Process">
+      <div class="wrap">
+        <div class="process__header">
+          <p class="process__label" data-reveal>How We Work</p>
+          <h2 class="process__title" data-reveal data-reveal-delay="1">From Ingredients to Art</h2>
+        </div>
+        <div class="process__timeline">
+
+          <div class="process__step">
+            <div class="process__step-number" aria-hidden="true">01</div>
+            <div class="process__step-dot" aria-hidden="true"></div>
+            <div class="process__step-image">
+              <img src="https://images.unsplash.com/photo-1495195134817-aeb325a55b65?w=400&q=80&auto=format&fit=crop"
+                   alt="Premium baking ingredients — chocolate, vanilla, and fresh butter"
+                   loading="lazy" width="400" height="400">
+            </div>
+            <h3 class="process__step-title">Select</h3>
+            <p class="process__step-text">The finest ingredients, sourced from trusted producers and local farms.</p>
+          </div>
+
+          <div class="process__step">
+            <div class="process__step-number" aria-hidden="true">02</div>
+            <div class="process__step-dot" aria-hidden="true"></div>
+            <div class="process__step-image">
+              <img src="https://images.unsplash.com/photo-1556217477-d325251ece38?w=400&q=80&auto=format&fit=crop"
+                   alt="Baker preparing cake batter with careful technique"
+                   loading="lazy" width="400" height="400">
+            </div>
+            <h3 class="process__step-title">Prepare</h3>
+            <p class="process__step-text">Traditional methods meet precise technique. Baked with patience and care.</p>
+          </div>
+
+          <div class="process__step">
+            <div class="process__step-number" aria-hidden="true">03</div>
+            <div class="process__step-dot" aria-hidden="true"></div>
+            <div class="process__step-image">
+              <img src="https://images.unsplash.com/photo-1587314168485-3236d6710814?w=400&q=80&auto=format&fit=crop"
+                   alt="Detailed cake decoration with delicate hand-piping and artistry"
+                   loading="lazy" width="400" height="400">
+            </div>
+            <h3 class="process__step-title">Decorate</h3>
+            <p class="process__step-text">Every detail finished by hand — from piping to edible gold leaf.</p>
+          </div>
+
+          <div class="process__step">
+            <div class="process__step-number" aria-hidden="true">04</div>
+            <div class="process__step-dot" aria-hidden="true"></div>
+            <div class="process__step-image">
+              <img src="https://images.unsplash.com/photo-1558301211-0d8c8ddee6ec?w=400&q=80&auto=format&fit=crop"
+                   alt="Beautifully packaged luxury cake ready for delivery"
+                   loading="lazy" width="400" height="400">
+            </div>
+            <h3 class="process__step-title">Deliver</h3>
+            <p class="process__step-text">Carefully packaged and delivered to your celebration, exactly on time.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         CUSTOM CAKES
+         ═══════════════════════════════════════════════ -->
+    <section class="custom" id="custom" aria-label="Custom Cakes">
+      <div class="wrap">
+        <div class="custom__grid">
+          <div class="custom__content">
+            <span class="custom__label" data-reveal>Bespoke</span>
+            <h2 class="custom__title" data-reveal data-reveal-delay="1">Your Imagination. <em>Our Craft.</em></h2>
+            <p class="custom__text" data-reveal data-reveal-delay="2">
+              Tell us about your celebration and we will design a cake that is entirely yours — from flavour to form, every detail considered and crafted by hand.
+            </p>
+            <ul class="custom__occasions" data-reveal data-reveal-delay="3">
+              <li class="custom__occasion">Birthdays</li>
+              <li class="custom__occasion">Weddings</li>
+              <li class="custom__occasion">Anniversaries</li>
+              <li class="custom__occasion">Celebrations</li>
+            </ul>
+            <a href="#" class="btn btn--primary" data-open-order data-reveal data-reveal-delay="4">Create Your Cake <span class="btn__arrow" aria-hidden="true">→</span></a>
+          </div>
+          <div class="custom__visual">
+            <div class="custom__image" data-clip-reveal>
+              <img src="https://images.unsplash.com/photo-1535254973040-607b474cb50d?w=700&q=80&auto=format&fit=crop"
+                   alt="An elaborate custom wedding cake with elegant tiered design and floral decorations"
+                   loading="lazy" width="700" height="875">
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Bespoke Cake Configurator -->
+        <div class="custom-builder" data-reveal data-reveal-delay="2">
+          <h3 class="builder-title">Interactive Atelier Configurator</h3>
+          <p class="builder-subtitle">Explore flavor pairings, tiers, and finishes for your personalized estimate.</p>
+
+          <div class="builder-step">
+            <span class="builder-step__label">1. Occasion</span>
+            <div class="builder-options" data-group="occasion">
+              <button type="button" class="builder-chip active" data-val="Wedding">Wedding</button>
+              <button type="button" class="builder-chip" data-val="Birthday">Birthday</button>
+              <button type="button" class="builder-chip" data-val="Anniversary">Anniversary</button>
+              <button type="button" class="builder-chip" data-val="Private Gala">Private Gala</button>
+            </div>
+          </div>
+
+          <div class="builder-step">
+            <span class="builder-step__label">2. Scale & Tiers</span>
+            <div class="builder-options" data-group="scale">
+              <button type="button" class="builder-chip active" data-val="Small (6–8 servings)" data-price="95" data-lead="3 days">Small (6–8 guests)</button>
+              <button type="button" class="builder-chip" data-val="Medium (10–15 servings)" data-price="150" data-lead="4 days">Medium 2-Tier (10–15 guests)</button>
+              <button type="button" class="builder-chip" data-val="Large (20–30 servings)" data-price="240" data-lead="5 days">Large 2-Tier (20–30 guests)</button>
+              <button type="button" class="builder-chip" data-val="Grand (40+ servings)" data-price="380" data-lead="7 days">Grand 3-Tier (40+ guests)</button>
+            </div>
+          </div>
+
+          <div class="builder-step">
+            <span class="builder-step__label">3. Flavor Pairing</span>
+            <div class="builder-options" data-group="flavor">
+              <button type="button" class="builder-chip active" data-val="Dark Chocolate">Valrhona Dark Ganache</button>
+              <button type="button" class="builder-chip" data-val="Pistachio & Rose">Pistachio & Persian Rose</button>
+              <button type="button" class="builder-chip" data-val="Lemon & Citrus">Bergamot & Yuzu Lemon</button>
+              <button type="button" class="builder-chip" data-val="Vanilla Bean">Tahitian Vanilla & Caramel</button>
+            </div>
+          </div>
+
+          <div class="builder-step">
+            <span class="builder-step__label">4. Handcrafted Finish</span>
+            <div class="builder-options" data-group="finish">
+              <button type="button" class="builder-chip active" data-add="0" data-val="Smooth Velvet Buttercream">Smooth Velvet Buttercream</button>
+              <button type="button" class="builder-chip" data-add="25" data-val="24K Edible Gold Leaf Accents">24K Edible Gold Leaf Accents (+ $25)</button>
+              <button type="button" class="builder-chip" data-add="35" data-val="Fresh Pressed Botanicals">Fresh Pressed Botanicals (+ $35)</button>
+              <button type="button" class="builder-chip" data-add="45" data-val="Sculpted Dark Chocolate Shards">Sculpted Chocolate Shards (+ $45)</button>
+            </div>
+          </div>
+
+          <div class="builder-summary">
+            <div class="builder-price-box">
+              <span class="builder-price-label">Estimated Artisan Price</span>
+              <span class="builder-price-value" id="builder-price-display">$95</span>
+              <span class="builder-lead-time" id="builder-lead-display">Lead time: 3 days recommended</span>
+            </div>
+            <button type="button" class="btn btn--primary" id="builder-order-btn">
+              Inquire With This Vision <span class="btn__arrow" aria-hidden="true">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         TESTIMONIALS
+         ═══════════════════════════════════════════════ -->
+    <section class="testimonials" id="testimonials" aria-label="What Our Clients Say">
+      <div class="wrap--narrow">
+        <div class="testimonials__header">
+          <p class="testimonials__label" data-reveal>Kind Words</p>
+          <h2 class="testimonials__title" data-reveal data-reveal-delay="1">What Our Clients Say</h2>
+        </div>
+        <div class="testimonials__grid">
+
+          <article class="testimonial-card" data-reveal>
+            <div class="testimonial-card__quote" aria-hidden="true">"</div>
+            <p class="testimonial-card__text">
+              The cake was the most talked-about part of our wedding. Three months later, guests are still asking where we ordered it. Absolute perfection.
+            </p>
+            <div class="testimonial-card__author">
+              <div class="testimonial-card__avatar" aria-hidden="true">S</div>
+              <div>
+                <div class="testimonial-card__name">Sarah & James</div>
+                <div class="testimonial-card__role">Wedding, October</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="testimonial-card" data-reveal data-reveal-delay="1">
+            <div class="testimonial-card__quote" aria-hidden="true">"</div>
+            <p class="testimonial-card__text">
+              I have ordered from Cake Atelier four times now. Each cake is different, each one beautiful, and the flavours are genuinely extraordinary.
+            </p>
+            <div class="testimonial-card__author">
+              <div class="testimonial-card__avatar" aria-hidden="true">M</div>
+              <div>
+                <div class="testimonial-card__name">Maria Antonova</div>
+                <div class="testimonial-card__role">Returning client</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="testimonial-card" data-reveal data-reveal-delay="2">
+            <div class="testimonial-card__quote" aria-hidden="true">"</div>
+            <p class="testimonial-card__text">
+              They turned my daughter's drawing into a real cake. The look on her face was worth everything. This is not just baking — it is art.
+            </p>
+            <div class="testimonial-card__author">
+              <div class="testimonial-card__avatar" aria-hidden="true">D</div>
+              <div>
+                <div class="testimonial-card__name">David Chen</div>
+                <div class="testimonial-card__role">Custom birthday cake</div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         FINAL CTA
+         ═══════════════════════════════════════════════ -->
+    <section class="final-cta" aria-label="Order Your Cake">
+      <div class="final-cta__bg" aria-hidden="true">
+        <img src="https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?w=1400&q=80&auto=format&fit=crop"
+             alt="" loading="lazy" width="1400" height="933">
+      </div>
+      <div class="final-cta__content">
+        <h2 class="final-cta__title" data-reveal>Every Celebration Deserves Something Special.</h2>
+        <p class="final-cta__text" data-reveal data-reveal-delay="1">
+          Whether it is a birthday, a wedding, or a quiet evening that calls for something beautiful — we are here to make it unforgettable.
+        </p>
+        <a href="#" class="btn btn--accent" data-open-order data-reveal data-reveal-delay="2">Order Your Cake <span class="btn__arrow" aria-hidden="true">→</span></a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════════ -->
+  <footer class="footer" role="contentinfo">
+    <div class="wrap">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <div class="footer__logo">Cake <span>Atelier</span></div>
+          <p class="footer__tagline">Handcrafted luxury cakes for celebrations that deserve something extraordinary.</p>
+        </div>
+        <div>
+          <h3 class="footer__heading">Visit</h3>
+          <ul class="footer__list" role="list">
+            <li>12 Rue du Faubourg</li>
+            <li>Marais District</li>
+            <li>Tue – Sat, 9 am – 6 pm</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="footer__heading">Explore</h3>
+          <ul class="footer__list" role="list">
+            <li><a href="#creations">Creations</a></li>
+            <li><a href="#process">Our Process</a></li>
+            <li><a href="#custom">Custom Cakes</a></li>
+            <li><a href="#testimonials">Stories</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="footer__heading">Connect</h3>
+          <ul class="footer__list" role="list">
+            <li><a href="mailto:hello@cakeatelier.example">hello@cakeatelier.example</a></li>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">Pinterest</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© 2026 Cake Atelier</span>
+        <span>Photography: Unsplash contributors</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════════
+       CAKE DETAIL MODAL
+       ═══════════════════════════════════════════════ -->
+  <div class="modal-overlay" id="cake-modal" role="dialog" aria-label="Cake details" aria-modal="true">
+    <div class="modal">
+      <button class="modal__close" aria-label="Close">&times;</button>
+      <div class="modal__image">
+        <img src="" alt="" width="450" height="600">
+      </div>
+      <div class="modal__content">
+        <h3 class="modal__name"></h3>
+        <div class="modal__price"></div>
+        <p class="modal__description"></p>
+        <div class="modal__details">
+          <div class="modal__detail">
+            <span class="modal__detail-label">Serves</span>
+            <span class="modal__detail-value"></span>
+          </div>
+          <div class="modal__detail">
+            <span class="modal__detail-label">Layers</span>
+            <span class="modal__detail-value"></span>
+          </div>
+          <div class="modal__detail">
+            <span class="modal__detail-label">Primary Flavour</span>
+            <span class="modal__detail-value"></span>
+          </div>
+        </div>
+        <a href="#" class="btn btn--primary btn--full" data-open-order>Order This Cake <span class="btn__arrow" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       ORDER / INQUIRY MODAL
+       ═══════════════════════════════════════════════ -->
+  <div class="modal-overlay order-modal" id="order-modal" role="dialog" aria-label="Cake inquiry form" aria-modal="true">
+    <div class="modal">
+      <button class="modal__close" aria-label="Close">&times;</button>
+      <div class="modal__content">
+        <h3 class="form-title">Create Your Cake</h3>
+        <p class="form-subtitle">Tell us about your celebration and we will design something extraordinary.</p>
+        <form id="order-form" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="order-name">Your Name</label>
+              <input class="form-input" type="text" id="order-name" name="name" required autocomplete="name">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="order-email">Email</label>
+              <input class="form-input" type="email" id="order-email" name="email" required autocomplete="email">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="order-occasion">Occasion</label>
+              <select class="form-select" id="order-occasion" name="occasion" required>
+                <option value="">Select occasion</option>
+                <option>Birthday</option>
+                <option>Wedding</option>
+                <option>Anniversary</option>
+                <option>Corporate Event</option>
+                <option>Other Celebration</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="order-size">Size</label>
+              <select class="form-select" id="order-size" name="size" required>
+                <option value="">Select size</option>
+                <option>Small (6–8 servings)</option>
+                <option>Medium (10–15 servings)</option>
+                <option>Large (20–30 servings)</option>
+                <option>Grand (40+ servings)</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="order-flavor">Preferred Flavour</label>
+            <select class="form-select" id="order-flavor" name="flavor">
+              <option value="">Select flavour (or describe below)</option>
+              <option>Dark Chocolate</option>
+              <option>Vanilla Bean</option>
+              <option>Lemon & Citrus</option>
+              <option>Red Velvet</option>
+              <option>Pistachio & Rose</option>
+              <option>Salted Caramel</option>
+              <option>Custom / Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="order-details">Design Requirements</label>
+            <textarea class="form-textarea" id="order-details" name="details" rows="4" placeholder="Describe your vision — colours, themes, style, any special requirements."></textarea>
+          </div>
+          <div class="form-submit">
+            <button type="submit" class="btn btn--primary" style="width:100%;justify-content:center;">Submit Inquiry <span class="btn__arrow" aria-hidden="true">→</span></button>
+          </div>
+          <p class="form-note">We respond within 24 hours. No payment is taken at this stage.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
