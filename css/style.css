@@ -2294,13 +2294,11 @@ html {
   position: relative;
   width: 100%;
   aspect-ratio: 1;
-  max-width: 440px;
+  max-width: 460px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  perspective: 1400px;
-  transform-style: preserve-3d;
   cursor: grab;
 }
 
@@ -2308,15 +2306,15 @@ html {
   cursor: grabbing;
 }
 
-.showcase__cake-rig {
-  position: relative;
-  width: 320px;
-  height: 320px;
-  transform-style: preserve-3d;
-  will-change: transform;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+#cake-webgl-canvas {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 460px;
+  max-height: 460px;
+  display: block;
+  outline: none;
+  touch-action: none;
+  user-select: none;
 }
 
 .cake-glow {
