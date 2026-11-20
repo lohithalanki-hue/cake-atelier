@@ -78,32 +78,151 @@
   <main id="main">
 
     <!-- ═══════════════════════════════════════════════
-         HERO
+         HERO SHOWCASE — Interactive 3D Cake (Inspired by User's Video)
+         Starts with top-down view of cake, camera sweeps down to side view,
+         cake rotates 360° on vertical axis revealing flavours,
+         then leaves the cake behind into the normal website!
          ═══════════════════════════════════════════════ -->
-    <section class="hero" aria-label="Welcome">
-      <div class="hero__content">
-        <div class="hero__text">
-          <span class="hero__label">Handcrafted in Small Batches</span>
-          <h1 class="hero__title">Made with <em>love.</em> Remembered forever.</h1>
-          <p class="hero__subtitle">Every cake we create is a work of edible art — crafted by hand from the finest ingredients for celebrations that matter.</p>
-          <div class="hero__actions">
-            <a href="#creations" class="btn btn--primary">Explore Our Creations <span class="btn__arrow" aria-hidden="true">→</span></a>
-            <a href="#" class="btn btn--secondary" data-open-order>Order a Cake</a>
+    <section class="hero-showcase" id="hero-showcase" aria-label="Interactive 3D Artisanal Cake Showcase">
+      <div class="hero-showcase__sticky">
+        
+        <!-- Ambient Watermark Typography -->
+        <div class="hero-showcase__watermark" aria-hidden="true">CAKE ATELIER</div>
+
+        <!-- Opening Overlay Header (visible in top-down view, fades on scroll) -->
+        <div class="hero-showcase__intro" id="hero-3d-intro">
+          <span class="hero-3d__label">Handcrafted in Small Batches · Paris</span>
+          <h1 class="hero-3d__title">Made with <em>love.</em><br>Remembered forever.</h1>
+          <p class="hero-3d__subtitle">Scroll down to explore the cake in 360°</p>
+          <div class="hero-3d__scroll-cue" aria-hidden="true">
+            <span class="cue-icon">↓</span>
           </div>
         </div>
-        <div class="hero__visual">
-          <div class="hero__image-wrap">
-            <img src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=800&q=80&auto=format&fit=crop"
-                 alt="A beautifully decorated luxury chocolate cake with rich ganache layers and elegant chocolate decorations"
-                 width="800" height="1000"
-                 fetchpriority="high">
+
+        <div class="hero-showcase__layout">
+
+          <!-- Left Flanking Column: Flavour Stories -->
+          <div class="hero-showcase__column hero-showcase__column--left" aria-live="polite">
+            
+            <!-- Flavour 1 Left -->
+            <article class="showcase-box showcase-box--1" data-step="1">
+              <span class="showcase-box__step">01 / SIGNATURE FLAVOUR</span>
+              <h3 class="showcase-box__title">Saffron Pistachio Royal</h3>
+              <p class="showcase-box__desc">
+                Infused with fragrant Kashmiri saffron and cardamom, layered with whipped clotted cream, crushed Iranian pistachios, and glazed confectionery.
+              </p>
+              <div class="showcase-box__meta">
+                <span class="meta-pill">Kashmiri Saffron</span>
+                <span class="meta-pill">Cardamom Pods</span>
+              </div>
+            </article>
+
+            <!-- Flavour 2 Left -->
+            <article class="showcase-box showcase-box--2" data-step="2">
+              <span class="showcase-box__step">02 / SIGNATURE FLAVOUR</span>
+              <h3 class="showcase-box__title">Single-Origin Valrhona 72%</h3>
+              <p class="showcase-box__desc">
+                Rich dark chocolate ganache conched with roasted cocoa nibs and espresso reduction for deep notes of dried fig and smoky mahogany.
+              </p>
+              <div class="showcase-box__meta">
+                <span class="meta-pill">72% Dark Cacao</span>
+                <span class="meta-pill">Espresso Ganache</span>
+              </div>
+            </article>
+
+            <!-- Flavour 3 Left -->
+            <article class="showcase-box showcase-box--3" data-step="3">
+              <span class="showcase-box__step">03 / SIGNATURE FLAVOUR</span>
+              <h3 class="showcase-box__title">Tahitian Vanilla & Praliné</h3>
+              <p class="showcase-box__desc">
+                Whole fragrant vanilla beans steeped cold in raw sweet cream, paired with caramelized Piedmont hazelnut praliné and flaky Maldon sea salt.
+              </p>
+              <div class="showcase-box__meta">
+                <span class="meta-pill">Tahitian Vanilla</span>
+                <span class="meta-pill">IGP Hazelnut</span>
+              </div>
+            </article>
+
           </div>
-          <div class="hero__image-accent" aria-hidden="true"></div>
+
+          <!-- Center Stage: The 3D Rotating Cake (Three.js WebGL) -->
+          <div class="hero-showcase__center">
+            <div class="hero-showcase__3d-stage" id="showcase-3d-stage" role="region" aria-label="3D Rotating Cake Model — Scroll to rotate">
+              
+              <!-- Real-time Three.js WebGL 3D Canvas -->
+              <canvas id="cake-webgl-canvas" width="540" height="540" aria-label="Interactive 3D Artisanal Cake Model"></canvas>
+
+              <!-- Interactive Hint Indicator -->
+              <div class="showcase-hint" id="showcase-hint" aria-hidden="true">
+                <span class="hint-icon">↺</span>
+                <span class="hint-text">Scroll to rotate 360° or drag</span>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Right Flanking Column: Texture & Craft Notes -->
+          <div class="hero-showcase__column hero-showcase__column--right" aria-live="polite">
+            
+            <!-- Flavour 1 Right -->
+            <article class="showcase-box showcase-box--1" data-step="1">
+              <span class="showcase-box__step">ARTISANAL DETAIL</span>
+              <h3 class="showcase-box__title">Caramelized Confectionery</h3>
+              <p class="showcase-box__desc">
+                Crowned with hand-glazed caramelized milk sweet spheres, 24K edible gold dragees, and delicate ruffled buttercream border on a gold base.
+              </p>
+              <div class="showcase-box__meta">
+                <span class="meta-pill">24K Gold Pearls</span>
+                <span class="meta-pill">Shell Piping</span>
+              </div>
+            </article>
+
+            <!-- Flavour 2 Right -->
+            <article class="showcase-box showcase-box--2" data-step="2">
+              <span class="showcase-box__step">TEXTURE MATRIX</span>
+              <h3 class="showcase-box__title">Ternary Genoise Crumb</h3>
+              <p class="showcase-box__desc">
+                Whipped cold with pasture-raised organic eggs and sweet cream butter. Exceptionally light, moist crumb structure that melts on the tongue.
+              </p>
+              <div class="showcase-box__meta">
+                <span class="meta-pill">Pasture Eggs</span>
+                <span class="meta-pill">Normandy Butter</span>
+              </div>
+            </article>
+
+            <!-- Flavour 3 Right -->
+            <article class="showcase-box showcase-box--3" data-step="3">
+              <span class="showcase-box__step">ATELIER DISPATCH</span>
+              <h3 class="showcase-box__title">Finished to Order in 4h</h3>
+              <p class="showcase-box__desc">
+                Decorated by hand on revolving turntables within 4 hours of your ceremony, delivered in climate-controlled presentation packaging.
+              </p>
+              <div class="showcase-box__meta">
+                <span class="meta-pill">Same-Day Craft</span>
+                <span class="meta-pill">Parisian Atelier</span>
+              </div>
+            </article>
+
+          </div>
+
         </div>
-      </div>
-      <div class="hero__scroll" aria-hidden="true">
-        <span class="hero__scroll-text">Scroll</span>
-        <div class="hero__scroll-line"></div>
+
+        <!-- Flavour Rotation Indicator -->
+        <div class="hero-showcase__nav" role="tablist" aria-label="Flavour chapters">
+          <button type="button" class="flavour-tab active" data-step="1" role="tab" aria-selected="true">
+            <span class="tab-dot"></span>
+            <span class="tab-label">Saffron Pistachio</span>
+          </button>
+          <button type="button" class="flavour-tab" data-step="2" role="tab" aria-selected="false">
+            <span class="tab-dot"></span>
+            <span class="tab-label">Valrhona Ganache</span>
+          </button>
+          <button type="button" class="flavour-tab" data-step="3" role="tab" aria-selected="false">
+            <span class="tab-dot"></span>
+            <span class="tab-label">Vanilla Praliné</span>
+          </button>
+        </div>
+
       </div>
     </section>
 
@@ -139,151 +258,6 @@
             </div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════════
-         SHOWCASE — Anatomy of an Atelier Masterpiece
-         Scroll-driven 3D Rotation Showcase (Inspired by Accent Boissons)
-         ═══════════════════════════════════════════════ -->
-    <section class="showcase" id="showcase" aria-label="Interactive Cake Anatomy Showcase">
-      <div class="showcase__sticky">
-        
-        <!-- Ambient Watermark Typography -->
-        <div class="showcase__watermark" aria-hidden="true">ANATOMIE D'UN GÂTEAU</div>
-
-        <div class="showcase__header">
-          <span class="showcase__label">Interactive Anatomy · 360° Exploration</span>
-          <h2 class="showcase__title">The Architecture of Flavor</h2>
-        </div>
-
-        <div class="showcase__layout">
-
-          <!-- Left Flanking Column: Storytelling Cards -->
-          <div class="showcase__column showcase__column--left" aria-live="polite">
-            
-            <!-- Chapter 1 Left -->
-            <article class="showcase__card showcase__card--1 active" data-chapter="1">
-              <span class="showcase__card-step">01 / The Cocoa Terroir</span>
-              <h3 class="showcase__card-title">Single-Origin 72% Valrhona</h3>
-              <p class="showcase__card-desc">
-                Harvested from organic shade-grown groves in the Ecuadorian basin. Conched for 72 hours to yield deep notes of dried black mission fig, toasted mahogany, and warm brioche.
-              </p>
-              <div class="showcase__card-meta">
-                <span class="meta-pill">Direct-Trade Cocoa</span>
-                <span class="meta-pill">48h Cold Ferment</span>
-              </div>
-            </article>
-
-            <!-- Chapter 2 Left -->
-            <article class="showcase__card showcase__card--2" data-chapter="2">
-              <span class="showcase__card-step">02 / The Silk Core</span>
-              <h3 class="showcase__card-title">Tahitian Bourbon Vanilla Cream</h3>
-              <p class="showcase__card-desc">
-                Whole fragrant vanilla pods hand-scraped into raw sweet cream from Isigny Sainte-Mère. Whipped cold into a cloud-like mousse that melts at precise body temperature.
-              </p>
-              <div class="showcase__card-meta">
-                <span class="meta-pill">Tahitian Pods</span>
-                <span class="meta-pill">Normandy Crème</span>
-              </div>
-            </article>
-
-            <!-- Chapter 3 Left -->
-            <article class="showcase__card showcase__card--3" data-chapter="3">
-              <span class="showcase__card-step">03 / The Architectural Crown</span>
-              <h3 class="showcase__card-title">24K Edible Gold & Chocolate Sails</h3>
-              <p class="showcase__card-desc">
-                Tempered dark chocolate sails poured over frozen Carrera marble, hand-leafed with Florentine 24-karat gold leaf and crystallized botanical pansy petals.
-              </p>
-              <div class="showcase__card-meta">
-                <span class="meta-pill">24K Gold Leaf</span>
-                <span class="meta-pill">Pressed Botanicals</span>
-              </div>
-            </article>
-
-          </div>
-
-          <!-- Center Stage: The 3D Rotating Cake (Three.js WebGL) -->
-          <div class="showcase__center">
-            <div class="showcase__3d-stage" id="showcase-3d-stage" role="region" aria-label="3D Rotating Cake Model — Scroll or drag to rotate">
-              
-              <!-- Real-time Three.js WebGL 3D Canvas -->
-              <canvas id="cake-webgl-canvas" width="480" height="480" aria-label="Interactive 3D Artisanal Cake Model"></canvas>
-
-              <!-- Interactive Hint Indicator -->
-              <div class="showcase__hint" aria-hidden="true">
-                <span class="hint-icon">↺</span>
-                <span class="hint-text">Scroll down or drag to inspect 360°</span>
-              </div>
-
-            </div>
-          </div>
-
-          <!-- Right Flanking Column: Tasting & Craft Notes -->
-          <div class="showcase__column showcase__column--right" aria-live="polite">
-            
-            <!-- Chapter 1 Right -->
-            <article class="showcase__card showcase__card--1 active" data-chapter="1">
-              <span class="showcase__card-step">Texture Profile</span>
-              <h3 class="showcase__card-title">Ternary Genoise Crumb</h3>
-              <p class="showcase__card-desc">
-                Zero synthetic emulsifiers. We rely on the natural tension of organic pasture-raised egg foam, creating a delicate crumb matrix that drinks in espresso liqueur without softening.
-              </p>
-              <div class="showcase__card-meta">
-                <span class="meta-pill">Pasture Eggs</span>
-                <span class="meta-pill">Espresso Reduction</span>
-              </div>
-            </article>
-
-            <!-- Chapter 2 Right -->
-            <article class="showcase__card showcase__card--2" data-chapter="2">
-              <span class="showcase__card-step">Aromatic Balance</span>
-              <h3 class="showcase__card-title">IGP Piedmont Hazelnut Praliné</h3>
-              <p class="showcase__card-desc">
-                Caramelized in copper basins with unrefined cane sugar, then stone-milled into a satin paste with hand-flaked Maldon sea salt for a sharp, addictive counterpoint to rich cocoa.
-              </p>
-              <div class="showcase__card-meta">
-                <span class="meta-pill">IGP Hazelnut</span>
-                <span class="meta-pill">Maldon Flakes</span>
-              </div>
-            </article>
-
-            <!-- Chapter 3 Right -->
-            <article class="showcase__card showcase__card--3" data-chapter="3">
-              <span class="showcase__card-step">The Atelier Promise</span>
-              <h3 class="showcase__card-title">Baked & Delivered in 4 Hours</h3>
-              <p class="showcase__card-desc">
-                To guarantee the ganache remains mirror-smooth and the feuilletine retains its crisp snap, every piece is finalized immediately prior to courier dispatch in bespoke cedar packaging.
-              </p>
-              <div class="showcase__card-meta">
-                <span class="meta-pill">Hand-Crafted in Paris</span>
-                <span class="meta-pill">Cedar Packaging</span>
-              </div>
-            </article>
-
-          </div>
-
-        </div>
-
-        <!-- Chapter Progress Navigation Bar -->
-        <div class="showcase__progress-bar" role="tablist" aria-label="Cake anatomy chapters">
-          <button type="button" class="progress-tab active" data-step="1" role="tab" aria-selected="true" aria-controls="step-1">
-            <span class="tab-index">01</span>
-            <span class="tab-name">Terroir & Cocoa</span>
-            <span class="tab-bar"></span>
-          </button>
-          <button type="button" class="progress-tab" data-step="2" role="tab" aria-selected="false" aria-controls="step-2">
-            <span class="tab-index">02</span>
-            <span class="tab-name">Core Harmony</span>
-            <span class="tab-bar"></span>
-          </button>
-          <button type="button" class="progress-tab" data-step="3" role="tab" aria-selected="false" aria-controls="step-3">
-            <span class="tab-index">03</span>
-            <span class="tab-name">Crown & Finissage</span>
-            <span class="tab-bar"></span>
-          </button>
-        </div>
-
       </div>
     </section>
 
