@@ -48,6 +48,8 @@
     <div class="nav__inner">
       <a href="#" class="nav__logo" aria-label="Cake Atelier — Home">Cake <span>Atelier</span></a>
       <ul class="nav__links" role="list">
+        <li><a href="#art" class="nav__link">Philosophy</a></li>
+        <li><a href="#showcase" class="nav__link">Anatomy</a></li>
         <li><a href="#creations" class="nav__link">Creations</a></li>
         <li><a href="#process" class="nav__link">Process</a></li>
         <li><a href="#custom" class="nav__link">Custom</a></li>
@@ -63,6 +65,8 @@
 
     <!-- Mobile Navigation -->
     <div class="nav__mobile" id="mobile-nav" role="dialog" aria-label="Navigation menu">
+      <a href="#art">Philosophy</a>
+      <a href="#showcase">Anatomy</a>
       <a href="#creations">Creations</a>
       <a href="#process">Process</a>
       <a href="#custom">Custom</a>
@@ -135,6 +139,180 @@
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         SHOWCASE — Anatomy of an Atelier Masterpiece
+         Scroll-driven 3D Rotation Showcase (Inspired by Accent Boissons)
+         ═══════════════════════════════════════════════ -->
+    <section class="showcase" id="showcase" aria-label="Interactive Cake Anatomy Showcase">
+      <div class="showcase__sticky">
+        
+        <!-- Ambient Watermark Typography -->
+        <div class="showcase__watermark" aria-hidden="true">ANATOMIE D'UN GÂTEAU</div>
+
+        <div class="showcase__header">
+          <span class="showcase__label">Interactive Anatomy · 360° Exploration</span>
+          <h2 class="showcase__title">The Architecture of Flavor</h2>
+        </div>
+
+        <div class="showcase__layout">
+
+          <!-- Left Flanking Column: Storytelling Cards -->
+          <div class="showcase__column showcase__column--left" aria-live="polite">
+            
+            <!-- Chapter 1 Left -->
+            <article class="showcase__card showcase__card--1 active" data-chapter="1">
+              <span class="showcase__card-step">01 / The Cocoa Terroir</span>
+              <h3 class="showcase__card-title">Single-Origin 72% Valrhona</h3>
+              <p class="showcase__card-desc">
+                Harvested from organic shade-grown groves in the Ecuadorian basin. Conched for 72 hours to yield deep notes of dried black mission fig, toasted mahogany, and warm brioche.
+              </p>
+              <div class="showcase__card-meta">
+                <span class="meta-pill">Direct-Trade Cocoa</span>
+                <span class="meta-pill">48h Cold Ferment</span>
+              </div>
+            </article>
+
+            <!-- Chapter 2 Left -->
+            <article class="showcase__card showcase__card--2" data-chapter="2">
+              <span class="showcase__card-step">02 / The Silk Core</span>
+              <h3 class="showcase__card-title">Tahitian Bourbon Vanilla Cream</h3>
+              <p class="showcase__card-desc">
+                Whole fragrant vanilla pods hand-scraped into raw sweet cream from Isigny Sainte-Mère. Whipped cold into a cloud-like mousse that melts at precise body temperature.
+              </p>
+              <div class="showcase__card-meta">
+                <span class="meta-pill">Tahitian Pods</span>
+                <span class="meta-pill">Normandy Crème</span>
+              </div>
+            </article>
+
+            <!-- Chapter 3 Left -->
+            <article class="showcase__card showcase__card--3" data-chapter="3">
+              <span class="showcase__card-step">03 / The Architectural Crown</span>
+              <h3 class="showcase__card-title">24K Edible Gold & Chocolate Sails</h3>
+              <p class="showcase__card-desc">
+                Tempered dark chocolate sails poured over frozen Carrera marble, hand-leafed with Florentine 24-karat gold leaf and crystallized botanical pansy petals.
+              </p>
+              <div class="showcase__card-meta">
+                <span class="meta-pill">24K Gold Leaf</span>
+                <span class="meta-pill">Pressed Botanicals</span>
+              </div>
+            </article>
+
+          </div>
+
+          <!-- Center Stage: The 3D Rotating Cake -->
+          <div class="showcase__center">
+            <div class="showcase__3d-stage" id="showcase-3d-stage" role="region" aria-label="3D Rotating Cake Model — Scroll or drag to rotate">
+              
+              <div class="showcase__cake-rig" id="showcase-cake-rig">
+                
+                <!-- Ambient Glow & Reflection -->
+                <div class="cake-glow" aria-hidden="true"></div>
+                <div class="cake-pedestal-shadow" aria-hidden="true"></div>
+                
+                <!-- Pedestal -->
+                <div class="cake-pedestal" aria-hidden="true">
+                  <div class="pedestal-top"></div>
+                  <div class="pedestal-base"></div>
+                </div>
+
+                <!-- 3D Cake Cylinder Model Structure -->
+                <div class="cake-sculpture">
+                  <!-- Primary Perspective Face -->
+                  <div class="cake-face cake-face--front">
+                    <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=1000&q=85&auto=format&fit=crop"
+                         alt="Centerpiece luxury gateau with mirror glaze and chocolate shards"
+                         width="480" height="480" loading="lazy">
+                  </div>
+                  <!-- Angular Specular Reflection Layer -->
+                  <div class="cake-specular" aria-hidden="true"></div>
+                  
+                  <!-- Floating Gold Leaf & Petal Particles -->
+                  <div class="cake-particle particle-1" aria-hidden="true">✦</div>
+                  <div class="cake-particle particle-2" aria-hidden="true">✦</div>
+                  <div class="cake-particle particle-3" aria-hidden="true">✦</div>
+                  <div class="cake-particle particle-4" aria-hidden="true">✦</div>
+                </div>
+
+              </div>
+
+              <!-- Interactive Hint Indicator -->
+              <div class="showcase__hint" aria-hidden="true">
+                <span class="hint-icon">↺</span>
+                <span class="hint-text">Scroll or drag to rotate 360°</span>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Right Flanking Column: Tasting & Craft Notes -->
+          <div class="showcase__column showcase__column--right" aria-live="polite">
+            
+            <!-- Chapter 1 Right -->
+            <article class="showcase__card showcase__card--1 active" data-chapter="1">
+              <span class="showcase__card-step">Texture Profile</span>
+              <h3 class="showcase__card-title">Ternary Genoise Crumb</h3>
+              <p class="showcase__card-desc">
+                Zero synthetic emulsifiers. We rely on the natural tension of organic pasture-raised egg foam, creating a delicate crumb matrix that drinks in espresso liqueur without softening.
+              </p>
+              <div class="showcase__card-meta">
+                <span class="meta-pill">Pasture Eggs</span>
+                <span class="meta-pill">Espresso Reduction</span>
+              </div>
+            </article>
+
+            <!-- Chapter 2 Right -->
+            <article class="showcase__card showcase__card--2" data-chapter="2">
+              <span class="showcase__card-step">Aromatic Balance</span>
+              <h3 class="showcase__card-title">IGP Piedmont Hazelnut Praliné</h3>
+              <p class="showcase__card-desc">
+                Caramelized in copper basins with unrefined cane sugar, then stone-milled into a satin paste with hand-flaked Maldon sea salt for a sharp, addictive counterpoint to rich cocoa.
+              </p>
+              <div class="showcase__card-meta">
+                <span class="meta-pill">IGP Hazelnut</span>
+                <span class="meta-pill">Maldon Flakes</span>
+              </div>
+            </article>
+
+            <!-- Chapter 3 Right -->
+            <article class="showcase__card showcase__card--3" data-chapter="3">
+              <span class="showcase__card-step">The Atelier Promise</span>
+              <h3 class="showcase__card-title">Baked & Delivered in 4 Hours</h3>
+              <p class="showcase__card-desc">
+                To guarantee the ganache remains mirror-smooth and the feuilletine retains its crisp snap, every piece is finalized immediately prior to courier dispatch in bespoke cedar packaging.
+              </p>
+              <div class="showcase__card-meta">
+                <span class="meta-pill">Hand-Crafted in Paris</span>
+                <span class="meta-pill">Cedar Packaging</span>
+              </div>
+            </article>
+
+          </div>
+
+        </div>
+
+        <!-- Chapter Progress Navigation Bar -->
+        <div class="showcase__progress-bar" role="tablist" aria-label="Cake anatomy chapters">
+          <button type="button" class="progress-tab active" data-step="1" role="tab" aria-selected="true" aria-controls="step-1">
+            <span class="tab-index">01</span>
+            <span class="tab-name">Terroir & Cocoa</span>
+            <span class="tab-bar"></span>
+          </button>
+          <button type="button" class="progress-tab" data-step="2" role="tab" aria-selected="false" aria-controls="step-2">
+            <span class="tab-index">02</span>
+            <span class="tab-name">Core Harmony</span>
+            <span class="tab-bar"></span>
+          </button>
+          <button type="button" class="progress-tab" data-step="3" role="tab" aria-selected="false" aria-controls="step-3">
+            <span class="tab-index">03</span>
+            <span class="tab-name">Crown & Finissage</span>
+            <span class="tab-bar"></span>
+          </button>
+        </div>
+
       </div>
     </section>
 
@@ -550,6 +728,8 @@
         <div>
           <h3 class="footer__heading">Explore</h3>
           <ul class="footer__list" role="list">
+            <li><a href="#art">Philosophy</a></li>
+            <li><a href="#showcase">Anatomy</a></li>
             <li><a href="#creations">Creations</a></li>
             <li><a href="#process">Our Process</a></li>
             <li><a href="#custom">Custom Cakes</a></li>
