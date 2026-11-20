@@ -19,6 +19,17 @@
 </head>
 <body>
 
+  <!-- Loading Curtain -->
+  <div class="loading-curtain" aria-hidden="true">
+    <div class="curtain-content">
+      <span class="curtain-text">Cake Atelier</span>
+      <span class="curtain-sub">Haute Pâtisserie & Bespoke Design</span>
+    </div>
+  </div>
+
+  <!-- Scroll Progress Indicator -->
+  <div class="scroll-progress" aria-hidden="true"></div>
+
   <!-- Custom Luxury Cursor -->
   <div class="custom-cursor" aria-hidden="true">
     <div class="cursor-dot"></div>
@@ -128,6 +139,38 @@
     </section>
 
     <!-- ═══════════════════════════════════════════════
+         MARQUEE — Editorial Accent
+         ═══════════════════════════════════════════════ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__inner">
+        <span class="marquee__item">Handcrafted in Small Batches</span>
+        <span class="marquee__separator">✦</span>
+        <span class="marquee__item">Madagascan Vanilla Bean</span>
+        <span class="marquee__separator">✦</span>
+        <span class="marquee__item">Valrhona Grand Cru Ganache</span>
+        <span class="marquee__separator">✦</span>
+        <span class="marquee__item">24K Edible Gold Accents</span>
+        <span class="marquee__separator">✦</span>
+        <span class="marquee__item">Bespoke Architectural Cakes</span>
+        <span class="marquee__separator">✦</span>
+        <span class="marquee__item">Artisanal Botanical Sugarcraft</span>
+        <span class="marquee__separator">✦</span>
+        <span class="marquee__item">Handcrafted in Small Batches</span>
+        <span class="marquee__separator">✦</span>
+        <span class="marquee__item">Madagascan Vanilla Bean</span>
+        <span class="marquee__separator">✦</span>
+        <span class="marquee__item">Valrhona Grand Cru Ganache</span>
+        <span class="marquee__separator">✦</span>
+        <span class="marquee__item">24K Edible Gold Accents</span>
+        <span class="marquee__separator">✦</span>
+        <span class="marquee__item">Bespoke Architectural Cakes</span>
+        <span class="marquee__separator">✦</span>
+        <span class="marquee__item">Artisanal Botanical Sugarcraft</span>
+        <span class="marquee__separator">✦</span>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
          SIGNATURE CREATIONS
          ═══════════════════════════════════════════════ -->
     <section class="creations" id="creations" aria-label="Signature Creations">
@@ -147,7 +190,7 @@
 
         <div class="creations__grid">
 
-          <article class="cake-card" data-category="chocolate" data-reveal tabindex="0" role="button" aria-label="View Midnight Velvet cake details">
+          <article class="cake-card" data-category="chocolate" tabindex="0" role="button" aria-label="View Midnight Velvet cake details">
             <div class="cake-card__image">
               <img src="https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=600&q=80&auto=format&fit=crop"
                    alt="Midnight Velvet — dark chocolate cake with gold leaf decoration"
@@ -165,7 +208,7 @@
             </div>
           </article>
 
-          <article class="cake-card" data-category="floral" data-reveal data-reveal-delay="1" tabindex="0" role="button" aria-label="View Rose & Pistachio cake details">
+          <article class="cake-card" data-category="floral" tabindex="0" role="button" aria-label="View Rose & Pistachio cake details">
             <div class="cake-card__image">
               <img src="https://images.unsplash.com/photo-1557979619-445218f326b9?w=600&q=80&auto=format&fit=crop"
                    alt="Rose & Pistachio — layered pistachio cake with rose petal decoration"
@@ -183,7 +226,7 @@
             </div>
           </article>
 
-          <article class="cake-card" data-category="caramel" data-reveal data-reveal-delay="2" tabindex="0" role="button" aria-label="View Caramel Brûlée cake details">
+          <article class="cake-card" data-category="caramel" tabindex="0" role="button" aria-label="View Caramel Brûlée cake details">
             <div class="cake-card__image">
               <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=600&q=80&auto=format&fit=crop"
                    alt="Caramel Brûlée — vanilla cake with salted caramel and hazelnut topping"
@@ -201,7 +244,7 @@
             </div>
           </article>
 
-          <article class="cake-card" data-category="floral" data-reveal tabindex="0" role="button" aria-label="View Berry Pavlova cake details">
+          <article class="cake-card" data-category="floral" tabindex="0" role="button" aria-label="View Berry Pavlova cake details">
             <div class="cake-card__image">
               <img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=600&q=80&auto=format&fit=crop"
                    alt="Berry Pavlova — layered pavlova with fresh berries and cream"
@@ -219,7 +262,7 @@
             </div>
           </article>
 
-          <article class="cake-card" data-category="floral" data-reveal data-reveal-delay="1" tabindex="0" role="button" aria-label="View Citrus Garden cake details">
+          <article class="cake-card" data-category="floral" tabindex="0" role="button" aria-label="View Citrus Garden cake details">
             <div class="cake-card__image">
               <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=600&q=80&auto=format&fit=crop"
                    alt="Citrus Garden — delicate layered artisan cake with fresh edible botanicals"
@@ -237,7 +280,7 @@
             </div>
           </article>
 
-          <article class="cake-card" data-category="chocolate" data-reveal data-reveal-delay="2" tabindex="0" role="button" aria-label="View Hazelnut Praline cake details">
+          <article class="cake-card" data-category="chocolate" tabindex="0" role="button" aria-label="View Hazelnut Praline cake details">
             <div class="cake-card__image">
               <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&q=80&auto=format&fit=crop"
                    alt="Hazelnut Praline — mirror glazed hazelnut mousse cake"
@@ -630,6 +673,10 @@
     </div>
   </div>
 
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/animations.js"></script>
 </body>
 </html>
