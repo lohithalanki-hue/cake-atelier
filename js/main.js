@@ -610,6 +610,19 @@
         });
       });
 
+      // 3D Showcase interactive cursor state
+      const stage = document.querySelector('#showcase-3d-stage');
+      if (stage) {
+        stage.addEventListener('mouseenter', () => {
+          cursor.classList.add('viewing');
+          if (cursorText) cursorText.textContent = '360°';
+        });
+        stage.addEventListener('mouseleave', () => {
+          cursor.classList.remove('viewing');
+          if (cursorText) cursorText.textContent = '';
+        });
+      }
+
       // Press state
       window.addEventListener('mousedown', () => {
         dot.style.transform = `translate(${mouseX}px, ${mouseY}px) scale(0.6)`;
