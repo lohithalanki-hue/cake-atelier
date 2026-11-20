@@ -1982,3 +1982,136 @@ html {
   color: var(--caramel);
   margin-top: 2px;
 }
+
+/* ═══════════════════════════════════════════════════════
+   CINEMATIC MOTION & GSAP INTEGRATION
+   ═══════════════════════════════════════════════════════ */
+
+/* Loading Curtain */
+.loading-curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: var(--chocolate);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ivory);
+  pointer-events: none;
+}
+
+.curtain-content {
+  text-align: center;
+  padding: var(--space-md);
+}
+
+.curtain-text {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  letter-spacing: -0.03em;
+  color: var(--ivory);
+  display: block;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.curtain-sub {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--caramel);
+  margin-top: 1rem;
+  display: block;
+  opacity: 0;
+}
+
+/* Scroll Progress Indicator */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--caramel), #d4a373);
+  transform-origin: left center;
+  transform: scaleX(0);
+  z-index: 999;
+  pointer-events: none;
+}
+
+/* Marquee — Infinite Editorial Banner */
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  padding: var(--space-lg) 0;
+  background: var(--surface);
+  border-top: 1px solid rgba(46, 29, 24, 0.08);
+  border-bottom: 1px solid rgba(46, 29, 24, 0.08);
+  position: relative;
+  z-index: 2;
+  user-select: none;
+}
+
+.marquee__inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 2.5rem;
+  will-change: transform;
+}
+
+.marquee__item {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2vw, 2.2rem);
+  font-style: italic;
+  color: var(--chocolate);
+  letter-spacing: -0.01em;
+}
+
+.marquee__separator {
+  color: var(--caramel);
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+/* Section Label Line Accent */
+.label-line {
+  display: inline-block;
+  width: 28px;
+  height: 1.5px;
+  background: var(--caramel);
+  vertical-align: middle;
+  transform-origin: left center;
+}
+
+/* Headline Reveal Overflow Hidden Mask */
+.text-reveal-inner {
+  display: block;
+  will-change: transform;
+}
+
+/* 3D Perspective on Cake Cards */
+.cake-card {
+  perspective: 1000px;
+}
+
+.cake-card__image {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* GSAP Active overrides: prevent CSS transition conflicts during JS tweens */
+.gsap-active .cake-card,
+.gsap-active .hero__image-wrap,
+.gsap-active .art-section__image,
+.gsap-active .custom__image {
+  transition: none !important;
+}
+
+/* Horizontal Process Scroll in Desktop */
+@media (min-width: 1025px) {
+  .process {
+    overflow: hidden;
+  }
+}
+
