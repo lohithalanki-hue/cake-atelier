@@ -203,46 +203,17 @@
 
           </div>
 
-          <!-- Center Stage: The 3D Rotating Cake -->
+          <!-- Center Stage: The 3D Rotating Cake (Three.js WebGL) -->
           <div class="showcase__center">
             <div class="showcase__3d-stage" id="showcase-3d-stage" role="region" aria-label="3D Rotating Cake Model — Scroll or drag to rotate">
               
-              <div class="showcase__cake-rig" id="showcase-cake-rig">
-                
-                <!-- Ambient Glow & Reflection -->
-                <div class="cake-glow" aria-hidden="true"></div>
-                <div class="cake-pedestal-shadow" aria-hidden="true"></div>
-                
-                <!-- Pedestal -->
-                <div class="cake-pedestal" aria-hidden="true">
-                  <div class="pedestal-top"></div>
-                  <div class="pedestal-base"></div>
-                </div>
-
-                <!-- 3D Cake Cylinder Model Structure -->
-                <div class="cake-sculpture">
-                  <!-- Primary Perspective Face -->
-                  <div class="cake-face cake-face--front">
-                    <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=1000&q=85&auto=format&fit=crop"
-                         alt="Centerpiece luxury gateau with mirror glaze and chocolate shards"
-                         width="480" height="480" loading="lazy">
-                  </div>
-                  <!-- Angular Specular Reflection Layer -->
-                  <div class="cake-specular" aria-hidden="true"></div>
-                  
-                  <!-- Floating Gold Leaf & Petal Particles -->
-                  <div class="cake-particle particle-1" aria-hidden="true">✦</div>
-                  <div class="cake-particle particle-2" aria-hidden="true">✦</div>
-                  <div class="cake-particle particle-3" aria-hidden="true">✦</div>
-                  <div class="cake-particle particle-4" aria-hidden="true">✦</div>
-                </div>
-
-              </div>
+              <!-- Real-time Three.js WebGL 3D Canvas -->
+              <canvas id="cake-webgl-canvas" width="480" height="480" aria-label="Interactive 3D Artisanal Cake Model"></canvas>
 
               <!-- Interactive Hint Indicator -->
               <div class="showcase__hint" aria-hidden="true">
                 <span class="hint-icon">↺</span>
-                <span class="hint-text">Scroll or drag to rotate 360°</span>
+                <span class="hint-text">Scroll down or drag to inspect 360°</span>
               </div>
 
             </div>
@@ -854,9 +825,11 @@
   </div>
 
   <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script src="js/main.js"></script>
   <script src="js/animations.js"></script>
+  <script src="js/cake-3d.js"></script>
 </body>
 </html>
