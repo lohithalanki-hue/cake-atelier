@@ -241,6 +241,149 @@
     });
   }
 
+  // ─── 3D Rotating Cake Showcase (Accent Boissons Style) ───
+  const showcase = document.querySelector('.showcase');
+  const cakeRig = document.querySelector('#showcase-cake-rig');
+  const stage = document.querySelector('#showcase-3d-stage');
+  const leftCards = document.querySelectorAll('.showcase__column--left .showcase__card');
+  const rightCards = document.querySelectorAll('.showcase__column--right .showcase__card');
+  const progressTabs = document.querySelectorAll('.progress-tab');
+
+  if (showcase && cakeRig) {
+    let currentChapter = 1;
+    let baseRotateY = -18;
+    let baseRotateX = 6;
+    let baseScale = 0.95;
+    let mouseDeltaX = 0;
+    let mouseDeltaY = 0;
+    let isDragging = false;
+    let dragStartX = 0;
+    let dragOffset = 0;
+
+    function updateCardsAndTabs(chapter) {
+      if (currentChapter === chapter) return;
+      currentChapter = chapter;
+
+      leftCards.forEach(c => {
+        c.classList.toggle('active', c.dataset.chapter === String(chapter));
+      });
+      rightCards.forEach(c => {
+        c.classList.toggle('active', c.dataset.chapter === String(chapter));
+      });
+      progressTabs.forEach(t => {
+        const isActive = t.dataset.step === String(chapter);
+        t.classList.toggle('active', isActive);
+        t.setAttribute('aria-selected', String(isActive));
+      });
+    }
+
+    // Pinned scroll-driven rotation
+    if (window.innerWidth > 1024) {
+      ScrollTrigger.create({
+        trigger: showcase,
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 0.8,
+        onUpdate: (self) => {
+          const p = self.progress;
+
+          // Interpolate rotation through chapters:
+          // 0.0 - 0.33: Chapter 1 (-18deg to 25deg)
+          // 0.33 - 0.66: Chapter 2 (25deg to 135deg)
+          // 0.66 - 1.0: Chapter 3 (135deg to 260deg)
+          baseRotateY = -18 + p * 280;
+          baseRotateX = 6 + Math.sin(p * Math.PI * 2) * 8;
+          baseScale = 0.95 + Math.sin(p * Math.PI) * 0.12;
+
+          // Determine active chapter
+          if (p < 0.33) {
+            updateCardsAndTabs(1);
+          } else if (p < 0.67) {
+            updateCardsAndTabs(2);
+          } else {
+            updateCardsAndTabs(3);
+          }
+        }
+      });
+    }
+
+    // Dynamic 60fps render loop combining scroll angle + mouse/drag delta
+    let renderX = 0;
+    let renderY = 0;
+    function renderCake3D() {
+      // Lerp mouse delta for smooth physical spring feel
+      renderX += (mouseDeltaX + dragOffset - renderX) * 0.08;
+      renderY += (mouseDeltaY - renderY) * 0.08;
+
+      const totalY = baseRotateY + renderX;
+      const totalX = baseRotateX + renderY;
+
+      cakeRig.style.transform = `rotateY(${totalY}deg) rotateX(${totalX}deg) scale(${baseScale})`;
+      requestAnimationFrame(renderCake3D);
+    }
+    renderCake3D();
+
+    // Mouse tilt tracking
+    if (stage && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      stage.addEventListener('mousemove', (e) => {
+        if (isDragging) return;
+        const rect = stage.getBoundingClientRect();
+        const nx = (e.clientX - rect.left) / rect.width - 0.5;
+        const ny = (e.clientY - rect.top) / rect.height - 0.5;
+        mouseDeltaX = nx * 24;
+        mouseDeltaY = -ny * 16;
+      });
+
+      stage.addEventListener('mouseleave', () => {
+        if (isDragging) return;
+        mouseDeltaX = 0;
+        mouseDeltaY = 0;
+      });
+
+      // Drag to rotate freely
+      stage.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        dragStartX = e.clientX;
+        stage.style.cursor = 'grabbing';
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        const dx = e.clientX - dragStartX;
+        dragOffset = dx * 0.6;
+      });
+
+      window.addEventListener('mouseup', () => {
+        if (isDragging) {
+          isDragging = false;
+          dragOffset = 0;
+          if (stage) stage.style.cursor = 'grab';
+        }
+      });
+    }
+
+    // Progress tab click navigation
+    progressTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const step = parseInt(tab.dataset.step, 10);
+        if (!step) return;
+
+        const showcaseRect = showcase.getBoundingClientRect();
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const showcaseTop = showcaseRect.top + scrollTop;
+        const scrollDistance = showcase.offsetHeight - window.innerHeight;
+
+        const targetP = (step - 1) / 2;
+        const targetScroll = showcaseTop + (targetP * scrollDistance);
+
+        window.scrollTo({
+          top: targetScroll,
+          behavior: 'smooth'
+        });
+      });
+    });
+  }
+
   // ─── Signature Creations — Staggered Cards ───
   const cakeCards = gsap.utils.toArray('.cake-card');
   if (cakeCards.length) {
