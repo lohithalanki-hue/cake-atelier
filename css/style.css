@@ -689,8 +689,20 @@ html {
 
 .creations__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: var(--space-lg);
+}
+
+@media (max-width: 1100px) {
+  .creations__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 580px) {
+  .creations__grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Cake card */
@@ -2224,10 +2236,10 @@ html {
 /* 3D Layout & Side Columns */
 .hero-showcase__layout {
   display: grid;
-  grid-template-columns: 1fr 1.35fr 1fr;
+  grid-template-columns: 1fr 1.6fr 1fr;
   align-items: center;
   width: 100%;
-  max-width: 1400px;
+  max-width: 1480px;
   margin: auto;
   position: relative;
   z-index: 2;
@@ -2321,23 +2333,23 @@ html {
   position: relative;
   width: 100%;
   aspect-ratio: 1;
-  max-width: 500px;
+  max-width: 620px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: grab;
+  cursor: default;
 }
 
 .hero-showcase__3d-stage:active {
-  cursor: grabbing;
+  cursor: default;
 }
 
 #cake-webgl-canvas {
   width: 100% !important;
   height: 100% !important;
-  max-width: 520px;
-  max-height: 520px;
+  max-width: 620px;
+  max-height: 620px;
   display: block;
   outline: none;
   touch-action: none;
@@ -2345,20 +2357,7 @@ html {
 }
 
 .showcase-hint {
-  position: absolute;
-  bottom: -22px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  white-space: nowrap;
-  opacity: 0.85;
-  pointer-events: none;
+  display: none;
 }
 
 .hint-icon {
