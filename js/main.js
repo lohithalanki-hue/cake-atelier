@@ -610,18 +610,8 @@
         });
       });
 
-      // 3D Showcase interactive cursor state
+      // 3D Showcase cursor state: quiet, clean pointer without distraction
       const stage = document.querySelector('#showcase-3d-stage');
-      if (stage) {
-        stage.addEventListener('mouseenter', () => {
-          cursor.classList.add('viewing');
-          if (cursorText) cursorText.textContent = '360°';
-        });
-        stage.addEventListener('mouseleave', () => {
-          cursor.classList.remove('viewing');
-          if (cursorText) cursorText.textContent = '';
-        });
-      }
 
       // Press state
       window.addEventListener('mousedown', () => {
