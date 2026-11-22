@@ -1,14 +1,14 @@
 /* ═══════════════════════════════════════════════════════
    CAKE ATELIER — Master 3D WebGL Chocolate Cake Engine
    Haute Chocolaterie Procedural 3D Model:
-   - Valrhona dark chocolate mirror glaze with clearcoat sheen
-   - Sculpted chocolate shards & 24K edible gold leaf flakes
-   - Slender, aesthetic, non-chunky proportions & slim bronze stand
-   - Starts at top-down view of the chocolate mirror crown
-   - Camera glides down to side view on scroll
-   - Rotates a full 360° circle on vertical Y-axis (XZ plane)
-   - Cursor drag rotation disabled (scroll-driven precision)
-   - Unpins smoothly into the streamlined atelier website
+   - Complete cake 100% visible with elegant framing (zero clipping)
+   - Organic, non-boxy artisan silhouette with tapered body & beveled shoulders
+   - Sculpted curved chocolate petals arcing inward like a cacao flower
+   - Liquid poured Valrhona mirror glaze with clearcoat specular sheen
+   - Hand-piped ganache quenelles with 24K edible gold leaf
+   - Brushed champagne-bronze revolving turntable & gold mirror board
+   - Starts at top-down view of mirror crown, sweeps down to side profile
+   - Rotates a full 360° circle on vertical Y-axis driven solely by scroll
    ═══════════════════════════════════════════════════════ */
 
 (function () {
@@ -28,13 +28,14 @@
   // ─── Scene & Camera Setup ───
   const scene = new THREE.Scene();
 
-  let width = container.clientWidth || 600;
-  let height = container.clientHeight || 600;
+  let width = container.clientWidth || 580;
+  let height = container.clientHeight || 580;
 
-  const camera = new THREE.PerspectiveCamera(36, width / height, 0.1, 100);
-  // Start from DIRECT TOP-DOWN viewpoint looking straight down at the chocolate glaze crown
-  camera.position.set(0, 8.0, 0.02);
-  camera.lookAt(0, 0.15, 0);
+  const camera = new THREE.PerspectiveCamera(34, width / height, 0.1, 100);
+
+  // Initial Top-Down viewpoint looking directly down at the mirror glaze crown
+  camera.position.set(0, 7.6, 0.02);
+  camera.lookAt(0, 0, 0);
 
   const renderer = new THREE.WebGLRenderer({
     canvas: canvas,
@@ -49,49 +50,49 @@
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
-  // ─── Haute Chocolaterie PBR Materials ───
-  // 1. High-Gloss Dark Chocolate Mirror Glaze (Guanaja 70%)
+  // ─── PBR Haute Chocolaterie Materials ───
+  // 1. Liquid Dark Chocolate Mirror Glaze (Valrhona Guanaja 70%)
   const chocolateGlazeMaterial = new THREE.MeshPhysicalMaterial({
-    color: 0x140A06,
-    roughness: 0.10,
+    color: 0x200E08,
+    roughness: 0.08,
     metalness: 0.06,
-    clearcoat: 0.95,
-    clearcoatRoughness: 0.08,
-    reflectivity: 0.85
+    clearcoat: 1.0,
+    clearcoatRoughness: 0.06,
+    reflectivity: 0.90
   });
 
-  // 2. Velvet Dark Chocolate Ganache Body
+  // 2. Velvet Dark Chocolate Ganache Body (Warm Cocoa Tones — NOT pitch-black)
   const chocolateGanacheMaterial = new THREE.MeshStandardMaterial({
-    color: 0x22130C,
-    roughness: 0.28,
-    metalness: 0.03
+    color: 0x321910,
+    roughness: 0.32,
+    metalness: 0.04
   });
 
-  // 3. Crisp Sculpted Tempered Chocolate Shards
-  const chocolateShardMaterial = new THREE.MeshStandardMaterial({
-    color: 0x180D07,
-    roughness: 0.18,
-    metalness: 0.06
+  // 3. Sculpted Tempered Chocolate Petals / Sails
+  const chocolatePetalMaterial = new THREE.MeshStandardMaterial({
+    color: 0x2A150D,
+    roughness: 0.16,
+    metalness: 0.08
   });
 
-  // 4. Brilliant 24K Edible Gold Leaf & Pearls
+  // 4. Edible 24K Gold Leaf & Micro Dragees
   const goldLeafMaterial = new THREE.MeshStandardMaterial({
     color: 0xF5D061,
     metalness: 0.96,
-    roughness: 0.12
+    roughness: 0.10
   });
 
-  // 5. Polished 24K Gold Cake Presentation Board
+  // 5. Polished 24K Gold Mirror Cake Presentation Board
   const goldBoardMaterial = new THREE.MeshStandardMaterial({
-    color: 0xD8A84E,
+    color: 0xE2B056,
     metalness: 0.94,
-    roughness: 0.14
+    roughness: 0.15
   });
 
-  // 6. Sleek Brushed Champagne Bronze Turntable Pedestal (Non-chunky)
+  // 6. Brushed Champagne Bronze Revolving Pedestal
   const bronzeStandMaterial = new THREE.MeshStandardMaterial({
-    color: 0x36281E,
-    roughness: 0.25,
+    color: 0x423224,
+    roughness: 0.28,
     metalness: 0.75
   });
 
@@ -99,164 +100,180 @@
   const cakeGroup = new THREE.Group();
   scene.add(cakeGroup);
 
-  // ── 1. Sleek, Slim Turntable Pedestal (Elegant & Slender) ──
+  // ── 1. Elegant Revolving Turntable Stand & 24K Gold Board ──
   const turntableGroup = new THREE.Group();
 
-  // Minimalist beveled base plate
+  // Beveled pedestal foot
   const standFoot = new THREE.Mesh(
-    new THREE.CylinderGeometry(1.85, 1.95, 0.04, 64),
+    new THREE.CylinderGeometry(1.42, 1.54, 0.04, 64),
     bronzeStandMaterial
   );
-  standFoot.position.y = -1.15;
+  standFoot.position.y = -1.22;
   standFoot.receiveShadow = true;
   turntableGroup.add(standFoot);
 
   // Slender architectural stem
   const standStem = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.32, 0.36, 0.26, 32),
+    new THREE.CylinderGeometry(0.24, 0.28, 0.22, 32),
     bronzeStandMaterial
   );
-  standStem.position.y = -1.01;
+  standStem.position.y = -1.09;
   standStem.receiveShadow = true;
   turntableGroup.add(standStem);
 
-  // Razor-thin revolving platter
+  // Revolving turntable platter with beveled edge
   const standPlatter = new THREE.Mesh(
-    new THREE.CylinderGeometry(2.35, 2.35, 0.03, 64),
+    new THREE.CylinderGeometry(1.82, 1.82, 0.035, 64),
     bronzeStandMaterial
   );
-  standPlatter.position.y = -0.87;
+  standPlatter.position.y = -0.96;
   standPlatter.receiveShadow = true;
   turntableGroup.add(standPlatter);
 
-  // Ultra-thin 24K Gold Mirror Board under cake
+  // Wafer-thin 24K Gold Mirror Board under cake
   const goldBoard = new THREE.Mesh(
-    new THREE.CylinderGeometry(2.24, 2.24, 0.022, 64),
+    new THREE.CylinderGeometry(1.74, 1.74, 0.025, 64),
     goldBoardMaterial
   );
-  goldBoard.position.y = -0.845;
+  goldBoard.position.y = -0.93;
   goldBoard.receiveShadow = true;
   turntableGroup.add(goldBoard);
 
   cakeGroup.add(turntableGroup);
 
-  // ── 2. Sleek Dark Chocolate Cake Cylinder ──
-  // Proportions: Graceful diameter (1.98 radius) & height (1.42), not a chunky block
+  // ── 2. Organic, Tapered Chocolate Cake Body (Non-Boxy) ──
+  // Gentle organic taper: radius 1.50 at base to 1.42 at top shoulder
   const cakeBody = new THREE.Mesh(
-    new THREE.CylinderGeometry(1.98, 1.98, 1.42, 64),
+    new THREE.CylinderGeometry(1.42, 1.50, 1.24, 64),
     chocolateGanacheMaterial
   );
-  cakeBody.position.y = -0.13;
+  cakeBody.position.y = -0.29;
   cakeBody.castShadow = true;
   cakeBody.receiveShadow = true;
   cakeGroup.add(cakeBody);
 
-  // ── 3. Poured Dark Chocolate Mirror Glaze Crown ──
-  // Smooth glossy mirror top cap
-  const glazeCap = new THREE.Mesh(
-    new THREE.CylinderGeometry(1.99, 1.99, 0.03, 64),
+  // Soft rounded ganache shoulder (eliminates harsh 90° boxy edge!)
+  const roundedShoulder = new THREE.Mesh(
+    new THREE.TorusGeometry(1.40, 0.045, 16, 64),
+    chocolateGanacheMaterial
+  );
+  roundedShoulder.rotation.x = Math.PI / 2;
+  roundedShoulder.position.y = 0.33;
+  roundedShoulder.castShadow = true;
+  cakeGroup.add(roundedShoulder);
+
+  // Liquid poured chocolate mirror glaze top reservoir
+  const glazeTop = new THREE.Mesh(
+    new THREE.CylinderGeometry(1.41, 1.41, 0.02, 64),
     chocolateGlazeMaterial
   );
-  glazeCap.position.y = 0.585;
-  glazeCap.receiveShadow = true;
-  cakeGroup.add(glazeCap);
+  glazeTop.position.y = 0.335;
+  glazeTop.receiveShadow = true;
+  cakeGroup.add(glazeTop);
 
-  // Rounded liquid mirror glaze bevel lip around top rim
-  const glazeRim = new THREE.Mesh(
-    new THREE.TorusGeometry(1.97, 0.025, 16, 64),
-    chocolateGlazeMaterial
-  );
-  glazeRim.rotation.x = Math.PI / 2;
-  glazeRim.position.y = 0.585;
-  cakeGroup.add(glazeRim);
+  // Flowing organic chocolate glaze scallops along top shoulder
+  const scallopCount = 8;
+  const scallopGeo = new THREE.SphereGeometry(0.12, 16, 16);
+  for (let i = 0; i < scallopCount; i++) {
+    const angle = (i / scallopCount) * Math.PI * 2;
+    const scallop = new THREE.Mesh(scallopGeo, chocolateGlazeMaterial);
+    scallop.scale.set(1.4, 0.5, 0.8);
+    scallop.position.set(
+      Math.cos(angle) * 1.41,
+      0.31,
+      Math.sin(angle) * 1.41
+    );
+    scallop.rotation.y = angle;
+    cakeGroup.add(scallop);
+  }
 
-  // ── 4. Mid-Waist 24K Gold Leaf Inlay Ribbon ──
-  const goldInlayBand = new THREE.Mesh(
-    new THREE.CylinderGeometry(1.988, 1.988, 0.015, 64),
+  // Mid-waist 24K gold leaf hairline ribbon
+  const goldWaistBand = new THREE.Mesh(
+    new THREE.CylinderGeometry(1.472, 1.472, 0.012, 64),
     goldLeafMaterial
   );
-  goldInlayBand.position.y = -0.12;
-  cakeGroup.add(goldInlayBand);
+  goldWaistBand.position.y = -0.30;
+  cakeGroup.add(goldWaistBand);
 
-  // ── 5. Fine Bottom Chocolate Pearl String (60 micro beads) ──
-  const pearlGeo = new THREE.SphereGeometry(0.045, 14, 14);
-  const basePearlCount = 60;
+  // Bottom delicate hand-piped chocolate pearls (48 micro beads on gold board)
+  const pearlGeo = new THREE.SphereGeometry(0.04, 14, 14);
+  const basePearlCount = 48;
   for (let i = 0; i < basePearlCount; i++) {
     const angle = (i / basePearlCount) * Math.PI * 2;
-    const pearl = new THREE.Mesh(pearlGeo, chocolateShardMaterial);
+    const pearl = new THREE.Mesh(pearlGeo, chocolatePetalMaterial);
     pearl.position.set(
-      Math.cos(angle) * 2.01,
-      -0.815,
-      Math.sin(angle) * 2.01
+      Math.cos(angle) * 1.54,
+      -0.89,
+      Math.sin(angle) * 1.54
     );
     turntableGroup.add(pearl);
   }
 
-  // ── 6. Top Surface: Sculpted Tempered Chocolate Shards & Quenelles ──
-  // (Spectacular aesthetic seen from top-down and side profile)
-  const shardCount = 8;
-  const shardGeo = new THREE.CylinderGeometry(0.24, 0.32, 0.55, 16, 1, true, 0, Math.PI * 0.72);
-  const quenelleGeo = new THREE.SphereGeometry(0.16, 20, 20);
-  const goldDotGeo = new THREE.SphereGeometry(0.045, 12, 12);
+  // ── 3. Top Crown: Sculpted Curved Chocolate Petals & Quenelles ──
+  // 8 graceful curved chocolate petals arcing inward like an opening cacao blossom
+  const petalCount = 8;
+  const petalGeo = new THREE.CylinderGeometry(0.32, 0.46, 0.52, 16, 1, true, 0, Math.PI * 0.70);
+  const quenelleGeo = new THREE.SphereGeometry(0.13, 20, 20);
+  const goldDotGeo = new THREE.SphereGeometry(0.038, 12, 12);
 
-  for (let i = 0; i < shardCount; i++) {
-    const angle = (i / shardCount) * Math.PI * 2;
-    const rShard = 1.32;
-    const rQuenelle = 1.62;
+  for (let i = 0; i < petalCount; i++) {
+    const angle = (i / petalCount) * Math.PI * 2;
+    const rPetal = 0.90;
+    const rQuenelle = 1.18;
 
-    // Sculpted curved chocolate shard
-    const shard = new THREE.Mesh(shardGeo, chocolateShardMaterial);
-    shard.scale.set(1.0, 1.2, 0.85);
-    shard.position.set(
-      Math.cos(angle) * rShard,
-      0.82,
-      Math.sin(angle) * rShard
+    // Sculpted curved chocolate petal sail
+    const petal = new THREE.Mesh(petalGeo, chocolatePetalMaterial);
+    petal.scale.set(0.95, 1.1, 0.75);
+    petal.position.set(
+      Math.cos(angle) * rPetal,
+      0.58,
+      Math.sin(angle) * rPetal
     );
-    shard.rotation.y = angle + Math.PI / 4;
-    shard.rotation.x = 0.22;
-    shard.rotation.z = -0.15;
-    shard.castShadow = true;
-    cakeGroup.add(shard);
+    petal.rotation.y = angle + Math.PI / 3;
+    petal.rotation.x = 0.28;
+    petal.rotation.z = -0.18;
+    petal.castShadow = true;
+    cakeGroup.add(petal);
 
-    // Delicate dark chocolate quenelle / bonbon on the outer top perimeter
+    // Hand-piped dark chocolate ganache quenelle (teardrop form)
     const quenelle = new THREE.Mesh(quenelleGeo, chocolateGlazeMaterial);
-    quenelle.scale.set(1.15, 0.8, 0.9);
+    quenelle.scale.set(1.2, 0.75, 0.8);
     quenelle.position.set(
-      Math.cos(angle + Math.PI / shardCount) * rQuenelle,
-      0.68,
-      Math.sin(angle + Math.PI / shardCount) * rQuenelle
+      Math.cos(angle + Math.PI / petalCount) * rQuenelle,
+      0.44,
+      Math.sin(angle + Math.PI / petalCount) * rQuenelle
     );
     quenelle.rotation.y = angle;
     quenelle.castShadow = true;
     cakeGroup.add(quenelle);
 
-    // 24K Edible Gold Leaf crowning each quenelle
+    // Shimmering 24K Edible Gold Leaf flake crowning each quenelle
     const goldLeaf = new THREE.Mesh(goldDotGeo, goldLeafMaterial);
-    goldLeaf.scale.set(1.1, 0.5, 1.1);
+    goldLeaf.scale.set(1.0, 0.35, 1.0);
     goldLeaf.position.set(
-      Math.cos(angle + Math.PI / shardCount) * rQuenelle,
-      0.81,
-      Math.sin(angle + Math.PI / shardCount) * rQuenelle
+      Math.cos(angle + Math.PI / petalCount) * rQuenelle,
+      0.54,
+      Math.sin(angle + Math.PI / petalCount) * rQuenelle
     );
     cakeGroup.add(goldLeaf);
   }
 
-  // ── 7. Center 24K Edible Gold Leaf Specks & Micro Dragees ──
-  // (Cluster of brilliant gold flecks catching the overhead light in top view)
-  const centerGoldCount = 42;
-  const flakeGeo = new THREE.OctahedronGeometry(0.038, 0);
+  // ── 4. Center 24K Edible Gold Leaf Constellation ──
+  // 36 irregular gold leaf flecks clustered on the dark mirror glaze
+  const centerGoldCount = 36;
+  const flakeGeo = new THREE.OctahedronGeometry(0.032, 0);
   for (let i = 0; i < centerGoldCount; i++) {
-    const r = Math.sqrt(Math.random()) * 0.95;
+    const r = Math.sqrt(Math.random()) * 0.72;
     const theta = Math.random() * Math.PI * 2;
     const flake = new THREE.Mesh(flakeGeo, goldLeafMaterial);
     flake.scale.set(
-      0.6 + Math.random() * 0.8,
-      0.25 + Math.random() * 0.35,
-      0.6 + Math.random() * 0.8
+      0.6 + Math.random() * 0.7,
+      0.22 + Math.random() * 0.3,
+      0.6 + Math.random() * 0.7
     );
     flake.position.set(
       Math.cos(theta) * r,
-      0.605,
+      0.355,
       Math.sin(theta) * r
     );
     flake.rotation.y = Math.random() * Math.PI;
@@ -264,17 +281,17 @@
     cakeGroup.add(flake);
   }
 
-  // ── 8. Ambient Golden Cacao Particle Mist ──
+  // ── 5. Ambient Floating Golden Particles ──
   const particleGroup = new THREE.Group();
-  const particleCount = 20;
-  const particleGeo = new THREE.OctahedronGeometry(0.032, 0);
+  const particleCount = 18;
+  const particleGeo = new THREE.OctahedronGeometry(0.028, 0);
   const particles = [];
 
   for (let i = 0; i < particleCount; i++) {
     const pMesh = new THREE.Mesh(particleGeo, goldLeafMaterial);
-    const r = 2.3 + Math.random() * 1.2;
+    const r = 2.0 + Math.random() * 1.0;
     const ang = Math.random() * Math.PI * 2;
-    const y = -0.7 + Math.random() * 2.5;
+    const y = -0.7 + Math.random() * 2.1;
 
     pMesh.position.set(Math.cos(ang) * r, y, Math.sin(ang) * r);
     particleGroup.add(pMesh);
@@ -283,34 +300,60 @@
       baseAngle: ang,
       radius: r,
       yOffset: y,
-      speed: 0.12 + Math.random() * 0.25,
-      bobSpeed: 1 + Math.random() * 1.8
+      speed: 0.12 + Math.random() * 0.22,
+      bobSpeed: 1.0 + Math.random() * 1.6
     });
   }
   cakeGroup.add(particleGroup);
 
-  // ─── Studio Lighting (Tuned for Dark Chocolate Depth) ───
-  const ambientLight = new THREE.AmbientLight(0xFFF7EC, 1.4);
+  // ─── Studio Lighting (Multi-Point Warm Cocoa Depth) ───
+  // Warm ivory ambient light (prevents harsh pitch-black shadows)
+  const ambientLight = new THREE.AmbientLight(0xFFF6E8, 1.9);
   scene.add(ambientLight);
 
-  // Key Light from upper right
-  const mainLight = new THREE.DirectionalLight(0xFFFAF2, 2.8);
-  mainLight.position.set(4.5, 9.5, 4.8);
+  // Key light from top-front-right
+  const mainLight = new THREE.DirectionalLight(0xFFFAF0, 3.0);
+  mainLight.position.set(4.5, 9.0, 5.0);
   mainLight.castShadow = true;
   mainLight.shadow.mapSize.width = 1024;
   mainLight.shadow.mapSize.height = 1024;
   mainLight.shadow.bias = -0.001;
   scene.add(mainLight);
 
-  // Back Rim Light to sculpt dark chocolate edges against background
-  const rimLight = new THREE.DirectionalLight(0xEAE0D2, 1.5);
-  rimLight.position.set(-5.0, 5.0, -4.5);
-  scene.add(rimLight);
+  // Fill / Bounce Light from lower-left (lifts shadows, illuminates chocolate & stand)
+  const fillLight = new THREE.DirectionalLight(0xF5E0C6, 2.4);
+  fillLight.position.set(-5.0, 4.0, -3.5);
+  scene.add(fillLight);
 
-  // Overhead Warm Spotlight for specular mirror glaze reflection in top view
-  const overheadSpot = new THREE.PointLight(0xFFE5B4, 3.2, 10);
+  // Overhead Warm Spotlight for mirror glaze reflection in top view
+  const overheadSpot = new THREE.PointLight(0xFFE2A0, 3.6, 10);
   overheadSpot.position.set(0, 4.5, 0.1);
   scene.add(overheadSpot);
+
+  // Subtle back rim light for silhouette definition
+  const rimLight = new THREE.DirectionalLight(0xEFE0D0, 2.0);
+  rimLight.position.set(0, 3.0, -6.0);
+  scene.add(rimLight);
+
+  // ─── Responsive Camera Framing (Guaranteed 100% Full Visibility) ───
+  function updateCameraFraming() {
+    width = container.clientWidth || 580;
+    height = container.clientHeight || 580;
+    const aspect = width / height;
+    camera.aspect = aspect;
+
+    // If container is narrower than 1:1, expand FOV proportionally so horizontal edges never crop
+    if (aspect < 1.0) {
+      camera.fov = 34 / aspect;
+    } else {
+      camera.fov = 34;
+    }
+
+    camera.updateProjectionMatrix();
+    renderer.setSize(width, height);
+  }
+
+  updateCameraFraming();
 
   // ─── Scroll-Driven Animation Choreography (No Cursor Drag) ───
   let scrollProgress = 0;
@@ -395,7 +438,6 @@
       const travel = section.offsetHeight - window.innerHeight;
 
       // Target progress for each flavour step:
-      // Step 1: 0.32, Step 2: 0.55, Step 3: 0.78
       const stepProgressMap = { 1: 0.32, 2: 0.55, 3: 0.78 };
       const targetP = stepProgressMap[step] || 0.32;
 
@@ -418,29 +460,29 @@
     currentRotationY += (targetRotationY - currentRotationY) * 0.09;
     cakeGroup.rotation.y = currentRotationY;
 
-    // ─── Camera Swoop: Top-Down to Side View ───
-    // At scrollProgress = 0: camera is at TOP-DOWN view (y: 8.0, z: 0.02)
-    // As user scrolls from 0 to 0.25: camera sweeps down to side view (y: 1.25, z: 5.4)
+    // ─── Camera Swoop: Top-Down to Full Side View ───
+    // At scrollProgress = 0: camera is at TOP-DOWN view (y: 7.6, z: 0.02) looking at (0, 0, 0)
+    // As user scrolls from 0 to 0.25: camera sweeps down to side profile (y: 0.25, z: 6.8) looking at (0, -0.22, 0)
     const cameraT = Math.min(scrollProgress / 0.25, 1.0);
     // Smooth easeInOut curve
     const smoothT = 0.5 - 0.5 * Math.cos(cameraT * Math.PI);
 
-    const startY = 8.0;
-    const endY = 1.25;
+    const startY = 7.6;
+    const endY = 0.25;
     const currentCamY = startY + (endY - startY) * smoothT;
 
     const startZ = 0.02;
-    const endZ = 5.4;
+    const endZ = 6.8;
     const currentCamZ = startZ + (endZ - startZ) * smoothT;
 
     camera.position.set(0, currentCamY, currentCamZ);
 
     // Look target smoothly lowers from top face to center of cake
-    const lookTargetY = 0.15 - smoothT * 0.25;
+    const lookTargetY = 0.0 - smoothT * 0.22;
     camera.lookAt(0, lookTargetY, 0);
 
-    // Subtle organic breathing motion
-    cakeGroup.position.y = Math.sin(elapsedTime * 1.0) * 0.025;
+    // Gentle organic breathing motion
+    cakeGroup.position.y = Math.sin(elapsedTime * 1.0) * 0.02;
 
     // Floating gold particle dust animation
     particles.forEach((p, idx) => {
@@ -457,16 +499,8 @@
 
   animate();
 
-  // ─── Responsive Resize ───
-  function onResize() {
-    width = container.clientWidth || 600;
-    height = container.clientHeight || 600;
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-    renderer.setSize(width, height);
-  }
+  // ─── Window Resize Listener ───
+  window.addEventListener('resize', updateCameraFraming, { passive: true });
 
-  window.addEventListener('resize', onResize, { passive: true });
-
-  console.log('🎂 Cake Atelier — Haute Chocolaterie 3D Engine Active');
+  console.log('🎂 Cake Atelier — Haute Chocolaterie 3D Engine Active (Full Visibility & Organic Sculpting)');
 })();
