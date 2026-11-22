@@ -2327,18 +2327,20 @@ html {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 
 .hero-showcase__3d-stage {
   position: relative;
   width: 100%;
   aspect-ratio: 1;
-  max-width: 620px;
+  max-width: 580px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: default;
+  overflow: visible;
 }
 
 .hero-showcase__3d-stage:active {
@@ -2348,8 +2350,8 @@ html {
 #cake-webgl-canvas {
   width: 100% !important;
   height: 100% !important;
-  max-width: 620px;
-  max-height: 620px;
+  max-width: 580px;
+  max-height: 580px;
   display: block;
   outline: none;
   touch-action: none;
@@ -2471,7 +2473,7 @@ html {
   }
 
   .hero-showcase__3d-stage {
-    max-width: 320px;
+    max-width: min(92vw, 480px);
     margin: 1rem auto;
   }
 
