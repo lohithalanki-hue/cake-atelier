@@ -30,14 +30,6 @@
   <!-- Scroll Progress Indicator -->
   <div class="scroll-progress" aria-hidden="true"></div>
 
-  <!-- Custom Luxury Cursor -->
-  <div class="custom-cursor" aria-hidden="true">
-    <div class="cursor-dot"></div>
-    <div class="cursor-ring">
-      <span class="cursor-text"></span>
-    </div>
-  </div>
-
   <!-- Skip Link -->
   <a href="#main" class="skip-link">Skip to main content</a>
 
@@ -72,109 +64,107 @@
   <main id="main">
 
     <!-- ═══════════════════════════════════════════════
-         HERO SHOWCASE — Interactive 3D Chocolate Cake
-         Top-down view of chocolate mirror crown, camera sweeps
-         down to side profile, 360° vertical-axis rotation
-         revealing flavour profiles, then leaves cake behind!
+         HERO SHOWCASE — Interactive 3D Artisanal Drip Cake
+         Full-screen 3D stage with dark chocolate drip, vanilla
+         speckled buttercream & wild forest berry crown.
+         Starts with top-down view of berries and mirror glaze,
+         sweeps down to side profile revealing drips and stand,
+         then 360° rotation with floating story cards!
          ═══════════════════════════════════════════════ -->
-    <section class="hero-showcase" id="hero-showcase" aria-label="Interactive 3D Artisanal Chocolate Cake Showcase">
+    <section class="hero-showcase" id="hero-showcase" aria-label="Interactive 3D Artisanal Drip Cake Showcase">
       <div class="hero-showcase__sticky">
         
         <!-- Ambient Watermark Typography -->
-        <div class="hero-showcase__watermark" aria-hidden="true">CHOCOLAT</div>
+        <div class="hero-showcase__watermark" aria-hidden="true">ATELIER</div>
+
+        <!-- FULL-SCREEN 3D WEBGL STAGE (Takes up the entire screen!) -->
+        <div class="hero-showcase__3d-stage" id="showcase-3d-stage" role="region" aria-label="3D Rotating Artisanal Cake Model">
+          <canvas id="cake-webgl-canvas" aria-label="Interactive 3D Artisanal Chocolate Drip Cake with Wild Berries"></canvas>
+        </div>
 
         <!-- Opening Overlay Header (visible in top-down view, fades on scroll) -->
         <div class="hero-showcase__intro" id="hero-3d-intro">
-          <span class="hero-3d__label">Haute Chocolaterie & Bespoke Design · Paris</span>
-          <h1 class="hero-3d__title">Crafted with <em>cocoa.</em><br>Sculpted forever.</h1>
-          <p class="hero-3d__subtitle">Scroll down to explore the creation in 360°</p>
+          <span class="hero-3d__label">Haute Pâtisserie & Bespoke Design · Paris</span>
+          <h1 class="hero-3d__title">Crafted with <em>passion.</em><br>Remembered forever.</h1>
+          <p class="hero-3d__subtitle">Scroll down to explore the cake in 360°</p>
           <div class="hero-3d__scroll-cue" aria-hidden="true">
             <span class="cue-icon">↓</span>
           </div>
         </div>
 
+        <!-- Floating Side Columns Overlay -->
         <div class="hero-showcase__layout">
 
-          <!-- Left Flanking Column: Chocolate Flavour Profiles -->
+          <!-- Left Flanking Column -->
           <div class="hero-showcase__column hero-showcase__column--left" aria-live="polite">
             
             <!-- Flavour 1 Left -->
             <article class="showcase-box showcase-box--1" data-step="1">
-              <span class="showcase-box__step">01 / SIGNATURE CHOCOLATE</span>
-              <h3 class="showcase-box__title">Guanaja Grand Cru 70%</h3>
+              <span class="showcase-box__step">01 / SIGNATURE FLAVOUR</span>
+              <h3 class="showcase-box__title">Belgian Chocolate Drip</h3>
               <p class="showcase-box__desc">
-                Single-origin dark cocoa from Valrhona conched for 72 hours, finished with an optical chocolate mirror glaze and 24K edible gold leaf.
+                Hand-poured Valrhona dark ganache cascading over Madagascar vanilla buttercream in varied, organic drips with liquid mirror gloss.
               </p>
               <div class="showcase-box__meta">
-                <span class="meta-pill">70% Dark Cacao</span>
-                <span class="meta-pill">24K Gold Leaf</span>
+                <span class="meta-pill">Dark Ganache Drip</span>
+                <span class="meta-pill">Mirror Glaze</span>
               </div>
             </article>
 
             <!-- Flavour 2 Left -->
             <article class="showcase-box showcase-box--2" data-step="2">
-              <span class="showcase-box__step">02 / CRUNCH & TEXTURE</span>
-              <h3 class="showcase-box__title">Piedmont Hazelnut Gianduja</h3>
+              <span class="showcase-box__step">02 / TEXTURE & CRUMB</span>
+              <h3 class="showcase-box__title">Speckled Vanilla Genoise</h3>
               <p class="showcase-box__desc">
-                Slow-roasted Italian hazelnuts stone-ground with caramelized milk chocolate, layered over a crisp cacao nib feuilletine.
+                Three-layer cloud-light sponge flecked with raw cacao nibs and bourbon vanilla beans, frosted in whipped mascarpone buttercream.
               </p>
               <div class="showcase-box__meta">
-                <span class="meta-pill">Piedmont IGP</span>
-                <span class="meta-pill">Feuilletine Crunch</span>
+                <span class="meta-pill">Bourbon Vanilla</span>
+                <span class="meta-pill">Cacao Nibs</span>
               </div>
             </article>
 
             <!-- Flavour 3 Left -->
             <article class="showcase-box showcase-box--3" data-step="3">
-              <span class="showcase-box__step">03 / FINISHING BALANCE</span>
-              <h3 class="showcase-box__title">Smoked Bourbon Caramel</h3>
+              <span class="showcase-box__step">03 / HARVEST FINISH</span>
+              <h3 class="showcase-box__title">Wild Forest Berries</h3>
               <p class="showcase-box__desc">
-                Slow-cooked amber caramel infused with Bourbon vanilla bean and Guérande sea salt crystals, balancing intense bittersweet cacao.
+                Fresh plump blackberries, ripe blueberries, and garden mint sprigs arranged in a hand-set crescent crown over the glossy chocolate top.
               </p>
               <div class="showcase-box__meta">
-                <span class="meta-pill">Guérande Sea Salt</span>
-                <span class="meta-pill">Bourbon Vanilla</span>
+                <span class="meta-pill">Fresh Blackberries</span>
+                <span class="meta-pill">Garden Mint</span>
               </div>
             </article>
 
           </div>
 
-          <!-- Center Stage: The 3D Rotating Chocolate Cake (Three.js WebGL) -->
-          <div class="hero-showcase__center">
-            <div class="hero-showcase__3d-stage" id="showcase-3d-stage" role="region" aria-label="3D Rotating Chocolate Cake Model">
-              
-              <!-- Real-time Three.js WebGL 3D Canvas (Guaranteed 100% Full Visibility) -->
-              <canvas id="cake-webgl-canvas" width="580" height="580" aria-label="Interactive 3D Artisanal Chocolate Cake"></canvas>
-
-            </div>
-          </div>
-
-          <!-- Right Flanking Column: Texture & Craft Notes -->
+          <!-- Right Flanking Column -->
           <div class="hero-showcase__column hero-showcase__column--right" aria-live="polite">
             
             <!-- Flavour 1 Right -->
             <article class="showcase-box showcase-box--1" data-step="1">
-              <span class="showcase-box__step">ATELIER TECHNIQUE</span>
-              <h3 class="showcase-box__title">Tempered Mirror Glaze</h3>
+              <span class="showcase-box__step">ATELIER CRAFT</span>
+              <h3 class="showcase-box__title">Organic Ganache Drip</h3>
               <p class="showcase-box__desc">
-                Poured precisely at 31.5°C over frozen chocolate ganache to achieve high-gloss optical reflection without gelatin cloudiness.
+                Poured precisely at 32°C so natural drips cascade down the side walls at varied, organic intervals before setting with crystal clarity.
               </p>
               <div class="showcase-box__meta">
-                <span class="meta-pill">31.5°C Precision</span>
-                <span class="meta-pill">Liquid Gloss</span>
+                <span class="meta-pill">Hand-Poured 32°C</span>
+                <span class="meta-pill">Artisan Drips</span>
               </div>
             </article>
 
             <!-- Flavour 2 Right -->
             <article class="showcase-box showcase-box--2" data-step="2">
               <span class="showcase-box__step">ATELIER DETAIL</span>
-              <h3 class="showcase-box__title">Ternary Chocolate Crumb</h3>
+              <h3 class="showcase-box__title">Whipped Cream Swirls</h3>
               <p class="showcase-box__desc">
-                Three harmonized cocoa textures: aerated chocolate sponge, dense flourless ganache, and hand-sculpted tempered chocolate shards.
+                Hand-piped vanilla buttercream rosettes crowned along the top perimeter, framing the rich dark chocolate glaze reservoir.
               </p>
               <div class="showcase-box__meta">
-                <span class="meta-pill">Triple Texture</span>
-                <span class="meta-pill">Dark Ganache</span>
+                <span class="meta-pill">Piped Rosettes</span>
+                <span class="meta-pill">Sweet Cream</span>
               </div>
             </article>
 
@@ -183,11 +173,11 @@
               <span class="showcase-box__step">ATELIER DISPATCH</span>
               <h3 class="showcase-box__title">Finished to Order in 4h</h3>
               <p class="showcase-box__desc">
-                Decorated by hand on revolving pedestals within 4 hours of your ceremony, delivered in climate-controlled luxury presentation cases.
+                Handcrafted on revolving pedestals within 4 hours of your ceremony, delivered in climate-controlled luxury presentation packaging.
               </p>
               <div class="showcase-box__meta">
                 <span class="meta-pill">Same-Day Craft</span>
-                <span class="meta-pill">Parisian Atelier</span>
+                <span class="meta-pill">Paris Atelier</span>
               </div>
             </article>
 
@@ -199,15 +189,17 @@
         <div class="hero-showcase__nav" role="tablist" aria-label="Flavour chapters">
           <button type="button" class="flavour-tab active" data-step="1" role="tab" aria-selected="true">
             <span class="tab-dot"></span>
-            <span class="tab-label">Guanaja 70%</span>
+            <span class="tab-label">Chocolate Drip</span>
           </button>
           <button type="button" class="flavour-tab" data-step="2" role="tab" aria-selected="false">
             <span class="tab-dot"></span>
-            <span class="tab-label">Hazelnut Gianduja</span>
+            <span class="tab-label">Speckled Cream</span>
           </button>
           <button type="button" class="flavour-tab" data-step="3" role="tab" aria-selected="false">
             <span class="tab-dot"></span>
-            <span class="tab-label">Bourbon Caramel</span>
+            <span class="tab-label">Wild Berry Crown</span>
+          </button>
+        </div>
           </button>
         </div>
 
