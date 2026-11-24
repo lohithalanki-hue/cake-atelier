@@ -27,14 +27,16 @@
   // ─── Scene & Camera Setup ───
   const scene = new THREE.Scene();
 
-  let width = container.clientWidth || window.innerWidth;
-  let height = container.clientHeight || window.innerHeight;
+  var width = container.clientWidth || window.innerWidth;
+  var height = container.clientHeight || window.innerHeight;
 
   const camera = new THREE.PerspectiveCamera(36, width / height, 0.1, 100);
 
-  // Initial Top-Down viewpoint looking down at the chocolate glaze & berry crescent
-  camera.position.set(0, 6.8, 0.02);
-  camera.lookAt(0, 0.08, 0);
+  // Initial Top-Down viewpoint — offset along +Z so cake sits in the
+  // LOWER 60% of the screen, leaving the top 40% as clean warm ivory
+  // ground where the headline text sits with zero overlap on dark cake.
+  camera.position.set(0, 7.4, 0.80);
+  camera.lookAt(0, 0, 0.80);
 
   const renderer = new THREE.WebGLRenderer({
     canvas: canvas,
@@ -45,51 +47,46 @@
   renderer.setSize(width, height);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.30;
+  renderer.toneMappingExposure = 1.25;
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
   // ─── PBR Artisanal Materials (Matching User Photos 2 & 3) ───
-  // 1. Liquid Dark Chocolate Ganache Drip & Mirror Glaze (Photo 2 & 3)
-  const chocolateGlazeMaterial = new THREE.MeshPhysicalMaterial({
-    color: 0x1A0B06,
-    roughness: 0.08,
-    metalness: 0.05,
-    clearcoat: 1.0,
-    clearcoatRoughness: 0.06,
-    reflectivity: 0.95
+
+  // 1. Rich Valrhona Dark Chocolate Mirror Glaze — warm, mouth-watering,
+  //    with high clearcoat for that liquid-glass editorial sheen
+  var chocolateGlazeMaterial = new THREE.MeshPhysicalMaterial({
+    color: 0x24120B,
+    roughness: 0.12,
+    metalness: 0.04,
+    clearcoat: 0.95,
+    clearcoatRoughness: 0.05,
+    reflectivity: 0.90
   });
 
   // 2. Creamy Vanilla Speckled Buttercream (Photo 3)
-  const buttercreamMaterial = new THREE.MeshStandardMaterial({
+  var buttercreamMaterial = new THREE.MeshStandardMaterial({
     color: 0xF7F3E9,
     roughness: 0.44,
     metalness: 0.02
   });
 
   // 3. Clean White Porcelain Cake Pedestal Stand (Photo 3)
-  const porcelainStandMaterial = new THREE.MeshStandardMaterial({
+  var porcelainStandMaterial = new THREE.MeshStandardMaterial({
     color: 0xFAF8F5,
     roughness: 0.20,
     metalness: 0.04
   });
 
-  // 4. Piped Whipped Buttercream Rosettes (Photo 3)
-  const whippedCreamMaterial = new THREE.MeshStandardMaterial({
-    color: 0xFFFEFA,
-    roughness: 0.28,
-    metalness: 0.01
-  });
-
-  // 5. Fresh Ripe Blueberries with frosted bloom (Photo 2)
-  const blueberryMaterial = new THREE.MeshStandardMaterial({
+  // 4. Fresh Ripe Blueberries with frosted bloom (Photo 2)
+  var blueberryMaterial = new THREE.MeshStandardMaterial({
     color: 0x222A42,
     roughness: 0.36,
     metalness: 0.06
   });
 
-  // 6. Glistening Fresh Blackberries (Photo 2)
-  const blackberryMaterial = new THREE.MeshPhysicalMaterial({
+  // 5. Glistening Fresh Blackberries (Photo 2)
+  var blackberryMaterial = new THREE.MeshPhysicalMaterial({
     color: 0x13070E,
     roughness: 0.12,
     metalness: 0.04,
@@ -97,29 +94,38 @@
     clearcoatRoughness: 0.08
   });
 
-  // 7. Vibrant Fresh Mint Leaves (Photo 2)
-  const mintLeafMaterial = new THREE.MeshStandardMaterial({
-    color: 0x2C6B3A,
+  // 6. Vibrant Fresh Mint Leaves (Photo 2)
+  var mintLeafMaterial = new THREE.MeshStandardMaterial({
+    color: 0x2E723E,
     roughness: 0.30,
     metalness: 0.02,
     side: THREE.DoubleSide
   });
 
-  // 8. Fine Cacao Speckles (embedded on buttercream, Photo 3)
-  const cacaoSpeckleMaterial = new THREE.MeshStandardMaterial({
+  // 7. Fine Cacao Speckles (embedded on buttercream, Photo 3)
+  var cacaoSpeckleMaterial = new THREE.MeshStandardMaterial({
     color: 0x24130C,
     roughness: 0.55
   });
 
+  // 8. Gold accent material (for gold foil flakes on top)
+  var goldFoilMaterial = new THREE.MeshStandardMaterial({
+    color: 0xD4A852,
+    roughness: 0.18,
+    metalness: 0.85,
+    emissive: 0x3A2800,
+    emissiveIntensity: 0.15
+  });
+
   // ─── Build the 3D Cake Hierarchy ───
-  const cakeGroup = new THREE.Group();
+  var cakeGroup = new THREE.Group();
   scene.add(cakeGroup);
 
   // ── 1. Elegant Porcelain Pedestal Cake Stand (Photo 3) ──
-  const standGroup = new THREE.Group();
+  var standGroup = new THREE.Group();
 
   // Wide beveled base foot
-  const standBase = new THREE.Mesh(
+  var standBase = new THREE.Mesh(
     new THREE.CylinderGeometry(1.65, 1.82, 0.05, 64),
     porcelainStandMaterial
   );
@@ -128,7 +134,7 @@
   standGroup.add(standBase);
 
   // Slender architectural pedestal stem
-  const standStem = new THREE.Mesh(
+  var standStem = new THREE.Mesh(
     new THREE.CylinderGeometry(0.30, 0.38, 0.34, 32),
     porcelainStandMaterial
   );
@@ -137,7 +143,7 @@
   standGroup.add(standStem);
 
   // Revolving top platter plate
-  const standPlatter = new THREE.Mesh(
+  var standPlatter = new THREE.Mesh(
     new THREE.CylinderGeometry(2.15, 2.15, 0.045, 64),
     porcelainStandMaterial
   );
@@ -148,9 +154,9 @@
   cakeGroup.add(standGroup);
 
   // ── 2. Creamy Vanilla Buttercream Body (Photo 3) ──
-  const cakeRadius = 1.76;
-  const cakeHeight = 1.38;
-  const cakeBody = new THREE.Mesh(
+  var cakeRadius = 1.76;
+  var cakeHeight = 1.38;
+  var cakeBody = new THREE.Mesh(
     new THREE.CylinderGeometry(cakeRadius, cakeRadius, cakeHeight, 64),
     buttercreamMaterial
   );
@@ -160,12 +166,12 @@
   cakeGroup.add(cakeBody);
 
   // Embedded cacao nib speckles on buttercream wall (Photo 3)
-  const speckleGeo = new THREE.SphereGeometry(0.016, 6, 6);
-  const speckleCount = 72;
-  for (let i = 0; i < speckleCount; i++) {
-    const angle = Math.random() * Math.PI * 2;
-    const y = -0.80 + Math.random() * 1.25;
-    const speckle = new THREE.Mesh(speckleGeo, cacaoSpeckleMaterial);
+  var speckleGeo = new THREE.SphereGeometry(0.016, 6, 6);
+  var speckleCount = 72;
+  for (var i = 0; i < speckleCount; i++) {
+    var angle = Math.random() * Math.PI * 2;
+    var y = -0.80 + Math.random() * 1.25;
+    var speckle = new THREE.Mesh(speckleGeo, cacaoSpeckleMaterial);
     speckle.position.set(
       Math.cos(angle) * (cakeRadius + 0.005),
       y,
@@ -175,11 +181,11 @@
   }
 
   // ── 3. Glossy Dark Chocolate Ganache Top & Cascading Drips (Photo 3) ──
-  const glazeY = 0.525;
+  var glazeY = 0.525;
 
-  // Liquid top glaze disc
-  const glazeTop = new THREE.Mesh(
-    new THREE.CylinderGeometry(cakeRadius + 0.01, cakeRadius + 0.01, 0.035, 64),
+  // Liquid top glaze disc — slightly thicker for realism
+  var glazeTop = new THREE.Mesh(
+    new THREE.CylinderGeometry(cakeRadius + 0.01, cakeRadius + 0.01, 0.045, 64),
     chocolateGlazeMaterial
   );
   glazeTop.position.y = glazeY;
@@ -187,7 +193,7 @@
   cakeGroup.add(glazeTop);
 
   // Rounded smooth glaze rim
-  const glazeLip = new THREE.Mesh(
+  var glazeLip = new THREE.Mesh(
     new THREE.TorusGeometry(cakeRadius + 0.005, 0.028, 16, 64),
     chocolateGlazeMaterial
   );
@@ -196,8 +202,7 @@
   cakeGroup.add(glazeLip);
 
   // Organic Cascading Drips of varied lengths (Photo 3)
-  // Pre-configured realistic drip heights around 36 radial positions
-  const dripLengths = [
+  var dripLengths = [
     0.28, 0.52, 0.18, 0.68, 0.35, 0.22, 0.58, 0.82,
     0.24, 0.44, 0.16, 0.62, 0.30, 0.72, 0.20, 0.48,
     0.34, 0.18, 0.60, 0.78, 0.26, 0.40, 0.15, 0.55,
@@ -205,100 +210,84 @@
     0.38, 0.20, 0.64, 0.84
   ];
 
-  const dripGroup = new THREE.Group();
-  const dripCount = dripLengths.length;
+  var dripGroup = new THREE.Group();
+  var dripCount = dripLengths.length;
 
-  for (let i = 0; i < dripCount; i++) {
-    const angle = (i / dripCount) * Math.PI * 2;
-    const len = dripLengths[i];
-    const r = cakeRadius + 0.008;
+  for (var di = 0; di < dripCount; di++) {
+    var dAngle = (di / dripCount) * Math.PI * 2;
+    var len = dripLengths[di];
+    var r = cakeRadius + 0.008;
 
     // Drip tapered stem
-    const stemGeo = new THREE.CylinderGeometry(0.026, 0.016, len, 10);
-    const stem = new THREE.Mesh(stemGeo, chocolateGlazeMaterial);
+    var stemGeo = new THREE.CylinderGeometry(0.026, 0.016, len, 10);
+    var stem = new THREE.Mesh(stemGeo, chocolateGlazeMaterial);
     stem.position.set(
-      Math.cos(angle) * r,
+      Math.cos(dAngle) * r,
       glazeY - len / 2,
-      Math.sin(angle) * r
+      Math.sin(dAngle) * r
     );
     dripGroup.add(stem);
 
     // Rounded droplet bead at bottom of drip
-    const dropGeo = new THREE.SphereGeometry(0.032, 12, 12);
-    const drop = new THREE.Mesh(dropGeo, chocolateGlazeMaterial);
+    var dropGeo = new THREE.SphereGeometry(0.032, 12, 12);
+    var drop = new THREE.Mesh(dropGeo, chocolateGlazeMaterial);
     drop.scale.set(1.0, 1.35, 0.85);
     drop.position.set(
-      Math.cos(angle) * r,
+      Math.cos(dAngle) * r,
       glazeY - len,
-      Math.sin(angle) * r
+      Math.sin(dAngle) * r
     );
     dripGroup.add(drop);
   }
   cakeGroup.add(dripGroup);
 
-  // ── 4. Piped Whipped Buttercream Swirls (along top rim, Photo 3) ──
-  const rosetteCount = 10;
-  const rosetteGeo = new THREE.TorusGeometry(0.12, 0.055, 16, 24);
-  const rosetteConeGeo = new THREE.ConeGeometry(0.08, 0.12, 16);
+  // ══ REMOVED: 10 White Torus Rosettes ══
+  // These TorusGeometry meshes flattened into harsh paper-disc circles
+  // in the pure top-down camera view. Removed to match Photo 2 precisely.
 
-  for (let i = 0; i < rosetteCount; i++) {
-    const angle = (i / rosetteCount) * Math.PI * 2;
-    const r = 1.48;
+  // ── 4. Fresh Berry Crescent & Mint Leaves (Directly from Photo 2!) ──
+  var berryGroup = new THREE.Group();
 
-    const rosette = new THREE.Mesh(rosetteGeo, whippedCreamMaterial);
-    rosette.rotation.x = Math.PI / 2;
-    rosette.position.set(Math.cos(angle) * r, glazeY + 0.04, Math.sin(angle) * r);
-    cakeGroup.add(rosette);
+  // A. Fresh Blueberries (Photo 2) — 36 plump berries in a dense crescent
+  var blueberryCount = 36;
+  for (var bi = 0; bi < blueberryCount; bi++) {
+    var bt = bi / (blueberryCount - 1);
+    var bAngle = -Math.PI * 0.95 + bt * Math.PI * 1.20;
+    var bR = 0.50 + Math.sin(bt * Math.PI) * 0.75 + (Math.random() - 0.5) * 0.22;
+    var bSize = 0.070 + Math.random() * 0.030;
 
-    const tip = new THREE.Mesh(rosetteConeGeo, whippedCreamMaterial);
-    tip.position.set(Math.cos(angle) * r, glazeY + 0.09, Math.sin(angle) * r);
-    cakeGroup.add(tip);
-  }
+    var bGeo = new THREE.SphereGeometry(bSize, 16, 16);
+    var blueberry = new THREE.Mesh(bGeo, blueberryMaterial);
+    blueberry.scale.set(1.0, 0.85, 1.0);
 
-  // ── 5. Fresh Berry Crescent & Mint Leaves (Directly from Photo 2!) ──
-  const berryGroup = new THREE.Group();
+    var bx = Math.cos(bAngle) * bR;
+    var bz = Math.sin(bAngle) * bR;
+    var by = glazeY + bSize * 0.85 + (bi % 2 === 0 ? 0.03 : 0);
 
-  // A. Fresh Blueberries (Photo 2)
-  const blueberryCount = 28;
-  for (let i = 0; i < blueberryCount; i++) {
-    // Crescent curve angles: from -0.95*PI to +0.25*PI
-    const t = i / (blueberryCount - 1);
-    const angle = -Math.PI * 0.95 + t * Math.PI * 1.20;
-    const r = 0.55 + Math.sin(t * Math.PI) * 0.70 + (Math.random() - 0.5) * 0.25;
-    const size = 0.075 + Math.random() * 0.035;
-
-    const bGeo = new THREE.SphereGeometry(size, 16, 16);
-    const blueberry = new THREE.Mesh(bGeo, blueberryMaterial);
-    blueberry.scale.set(1.0, 0.85, 1.0); // Slight natural berry flattening
-
-    const x = Math.cos(angle) * r;
-    const z = Math.sin(angle) * r;
-    const y = glazeY + size * 0.85 + (i % 2 === 0 ? 0.03 : 0);
-
-    blueberry.position.set(x, y, z);
+    blueberry.position.set(bx, by, bz);
     blueberry.castShadow = true;
     berryGroup.add(blueberry);
   }
 
   // B. Glistening Blackberries (composed of clusters of tiny drupelet spheres, Photo 2)
-  const blackberryCount = 10;
-  const drupeletGeo = new THREE.SphereGeometry(0.024, 10, 10);
+  var blackberryCount = 12;
+  var drupeletGeo = new THREE.SphereGeometry(0.024, 10, 10);
 
-  for (let i = 0; i < blackberryCount; i++) {
-    const t = (i + 0.5) / blackberryCount;
-    const angle = -Math.PI * 0.90 + t * Math.PI * 1.15;
-    const r = 0.65 + Math.sin(t * Math.PI) * 0.60 + (Math.random() - 0.5) * 0.18;
-    const centerX = Math.cos(angle) * r;
-    const centerZ = Math.sin(angle) * r;
-    const centerY = glazeY + 0.08;
+  for (var bbi = 0; bbi < blackberryCount; bbi++) {
+    var bbt = (bbi + 0.5) / blackberryCount;
+    var bbAngle = -Math.PI * 0.90 + bbt * Math.PI * 1.15;
+    var bbR = 0.60 + Math.sin(bbt * Math.PI) * 0.65 + (Math.random() - 0.5) * 0.18;
+    var centerX = Math.cos(bbAngle) * bbR;
+    var centerZ = Math.sin(bbAngle) * bbR;
+    var centerY = glazeY + 0.08;
 
-    const blackberry = new THREE.Group();
-    // Cluster 14 micro drupelets into one blackberry
-    for (let d = 0; d < 14; d++) {
-      const u = Math.random() * Math.PI * 2;
-      const v = (Math.random() - 0.5) * Math.PI * 0.8;
-      const dR = 0.055;
-      const drupelet = new THREE.Mesh(drupeletGeo, blackberryMaterial);
+    var blackberry = new THREE.Group();
+    // Cluster 16 micro drupelets into one blackberry
+    for (var d = 0; d < 16; d++) {
+      var u = Math.random() * Math.PI * 2;
+      var v = (Math.random() - 0.5) * Math.PI * 0.8;
+      var dR = 0.058;
+      var drupelet = new THREE.Mesh(drupeletGeo, blackberryMaterial);
       drupelet.position.set(
         Math.cos(u) * Math.cos(v) * dR,
         Math.sin(v) * 0.075,
@@ -313,35 +302,37 @@
     berryGroup.add(blackberry);
   }
 
-  // C. Fresh Green Mint Leaves (Photo 2)
-  const mintPositions = [
-    { angle: -Math.PI * 0.80, r: 1.05, rotZ: 0.25 },
-    { angle: -Math.PI * 0.50, r: 1.25, rotZ: -0.35 },
-    { angle: -Math.PI * 0.20, r: 1.15, rotZ: 0.40 },
-    { angle: 0.05, r: 0.85, rotZ: -0.20 },
-    { angle: -Math.PI * 0.65, r: 0.45, rotZ: 0.30 },
-    { angle: -Math.PI * 0.35, r: 0.50, rotZ: -0.25 }
+  // C. Fresh Green Mint Leaves (Photo 2) — 8 arched leaves
+  var mintPositions = [
+    { angle: -Math.PI * 0.85, r: 1.05, rotZ: 0.25 },
+    { angle: -Math.PI * 0.70, r: 0.40, rotZ: -0.30 },
+    { angle: -Math.PI * 0.55, r: 1.20, rotZ: -0.35 },
+    { angle: -Math.PI * 0.40, r: 0.55, rotZ: 0.40 },
+    { angle: -Math.PI * 0.25, r: 1.10, rotZ: 0.30 },
+    { angle: -Math.PI * 0.10, r: 0.80, rotZ: -0.20 },
+    { angle: 0.05, r: 0.45, rotZ: 0.35 },
+    { angle: -Math.PI * 0.65, r: 0.90, rotZ: -0.25 }
   ];
 
   // Leaf shape geometry
-  const leafShape = new THREE.Shape();
+  var leafShape = new THREE.Shape();
   leafShape.moveTo(0, 0);
   leafShape.quadraticCurveTo(0.08, 0.12, 0, 0.24);
   leafShape.quadraticCurveTo(-0.08, 0.12, 0, 0);
 
-  const leafGeo = new THREE.ShapeGeometry(leafShape);
+  var leafGeo = new THREE.ShapeGeometry(leafShape);
 
-  mintPositions.forEach(pos => {
-    const mintPair = new THREE.Group();
+  mintPositions.forEach(function (pos) {
+    var mintPair = new THREE.Group();
 
     // Leaf 1
-    const leaf1 = new THREE.Mesh(leafGeo, mintLeafMaterial);
+    var leaf1 = new THREE.Mesh(leafGeo, mintLeafMaterial);
     leaf1.rotation.x = -Math.PI / 2.6;
     leaf1.rotation.z = pos.rotZ;
     mintPair.add(leaf1);
 
     // Leaf 2
-    const leaf2 = new THREE.Mesh(leafGeo, mintLeafMaterial);
+    var leaf2 = new THREE.Mesh(leafGeo, mintLeafMaterial);
     leaf2.scale.set(0.8, 0.8, 0.8);
     leaf2.rotation.x = -Math.PI / 2.4;
     leaf2.rotation.z = pos.rotZ + 0.65;
@@ -355,15 +346,32 @@
     berryGroup.add(mintPair);
   });
 
+  // D. Delicate 24K Gold Foil Flakes scattered on the glaze
+  var goldFlakeGeo = new THREE.PlaneGeometry(0.045, 0.035);
+  for (var gi = 0; gi < 18; gi++) {
+    var gAngle = Math.random() * Math.PI * 2;
+    var gR = Math.random() * 1.3;
+    var flake = new THREE.Mesh(goldFlakeGeo, goldFoilMaterial);
+    flake.rotation.x = -Math.PI / 2 + (Math.random() - 0.5) * 0.4;
+    flake.rotation.z = Math.random() * Math.PI;
+    flake.position.set(
+      Math.cos(gAngle) * gR,
+      glazeY + 0.025,
+      Math.sin(gAngle) * gR
+    );
+    berryGroup.add(flake);
+  }
+
   cakeGroup.add(berryGroup);
 
-  // ─── Studio Lighting (Warm, Natural & High-Contrast) ───
+  // ─── Studio Lighting (Warm, Soft & High-Contrast — No Harsh PointLight) ───
+
   // Soft warm ambient fill
-  const ambientLight = new THREE.AmbientLight(0xFFF7ED, 1.8);
+  var ambientLight = new THREE.AmbientLight(0xFFF6EA, 1.9);
   scene.add(ambientLight);
 
-  // Studio Key Light (upper-right-front)
-  const keyLight = new THREE.DirectionalLight(0xFFFAF2, 2.8);
+  // Studio Key Light — broad diagonal gleam across mirror glaze (upper-right-front)
+  var keyLight = new THREE.DirectionalLight(0xFFFAF2, 2.8);
   keyLight.position.set(4.5, 9.0, 5.0);
   keyLight.castShadow = true;
   keyLight.shadow.mapSize.width = 1024;
@@ -372,26 +380,30 @@
   scene.add(keyLight);
 
   // Warm Bounce / Fill Light (lower-left)
-  const fillLight = new THREE.DirectionalLight(0xF4E4D0, 2.2);
+  var fillLight = new THREE.DirectionalLight(0xF6E8D6, 2.2);
   fillLight.position.set(-5.0, 4.0, -3.5);
   scene.add(fillLight);
 
-  // Overhead Warm Spotlight (creates glassy reflection on mirror glaze in top view)
-  const overheadSpot = new THREE.PointLight(0xFFE0A0, 3.4, 10);
-  overheadSpot.position.set(0, 4.8, 0.1);
-  scene.add(overheadSpot);
+  // ══ REMOVED: overheadSpot PointLight ══
+  // The PointLight(0xFFE0A0, 3.4, 10) at (0, 4.8, 0.1) created a harsh,
+  // blinding yellow flashlight dot on the mirror glaze. Replaced with
+  // a broad, soft top HemisphereLight for even warmth.
+
+  // Broad soft hemisphere light — simulates studio bounce ceiling
+  var hemiLight = new THREE.HemisphereLight(0xFFF8EE, 0xE8D6C0, 1.6);
+  hemiLight.position.set(0, 6, 0);
+  scene.add(hemiLight);
 
   // Subtle Backlight for rim definition
-  const rimLight = new THREE.DirectionalLight(0xEDE2D4, 1.8);
+  var rimLight = new THREE.DirectionalLight(0xEDE2D4, 1.8);
   rimLight.position.set(0, 3.0, -6.0);
   scene.add(rimLight);
 
   // ─── Full-Screen Responsive Camera Framing ───
-  // The cake occupies the full screen dynamically on all resolutions
   function updateCameraFraming() {
     width = container.clientWidth || window.innerWidth;
     height = container.clientHeight || window.innerHeight;
-    const aspect = width / height;
+    var aspect = width / height;
     camera.aspect = aspect;
 
     // Responsive FOV: expands on portrait/narrow mobile screens so cake is never cut off
@@ -408,24 +420,24 @@
   updateCameraFraming();
 
   // ─── Scroll-Driven Animation Choreography (No Cursor Drag) ───
-  let scrollProgress = 0;
-  let targetRotationY = 0;
-  let currentRotationY = 0;
+  var scrollProgress = 0;
+  var targetRotationY = 0;
+  var currentRotationY = 0;
 
-  const introOverlay = document.querySelector('#hero-3d-intro');
-  const leftCards = document.querySelectorAll('.hero-showcase__column--left .showcase-box');
-  const rightCards = document.querySelectorAll('.hero-showcase__column--right .showcase-box');
-  const flavourTabs = document.querySelectorAll('.flavour-tab');
+  var introOverlay = document.querySelector('#hero-3d-intro');
+  var leftCards = document.querySelectorAll('.hero-showcase__column--left .showcase-box');
+  var rightCards = document.querySelectorAll('.hero-showcase__column--right .showcase-box');
+  var flavourTabs = document.querySelectorAll('.flavour-tab');
 
   function updateFlavourStep(step) {
-    leftCards.forEach(c => {
+    leftCards.forEach(function (c) {
       c.classList.toggle('active', c.dataset.step === String(step));
     });
-    rightCards.forEach(c => {
+    rightCards.forEach(function (c) {
       c.classList.toggle('active', c.dataset.step === String(step));
     });
-    flavourTabs.forEach(t => {
-      const active = t.dataset.step === String(step);
+    flavourTabs.forEach(function (t) {
+      var active = t.dataset.step === String(step);
       t.classList.toggle('active', active);
       t.setAttribute('aria-selected', String(active));
     });
@@ -438,14 +450,14 @@
       start: 'top top',
       end: 'bottom bottom',
       scrub: 0.6,
-      onUpdate: (self) => {
+      onUpdate: function (self) {
         scrollProgress = self.progress;
 
         // Phase 1: 0.0 -> 0.25:
         // Cake occupies full screen! Camera swoops down from top-down berry view to side view.
         // Intro overlay header fades out
         if (introOverlay) {
-          const introOpacity = Math.max(0, 1 - (scrollProgress / 0.18));
+          var introOpacity = Math.max(0, 1 - (scrollProgress / 0.18));
           introOverlay.style.opacity = introOpacity;
           introOverlay.style.pointerEvents = introOpacity < 0.1 ? 'none' : 'auto';
         }
@@ -455,10 +467,10 @@
         if (scrollProgress < 0.25) {
           targetRotationY = 0;
           // Hide side cards while at top-down view (cake commands full screen!)
-          leftCards.forEach(c => c.classList.remove('active'));
-          rightCards.forEach(c => c.classList.remove('active'));
+          leftCards.forEach(function (c) { c.classList.remove('active'); });
+          rightCards.forEach(function (c) { c.classList.remove('active'); });
         } else if (scrollProgress <= 0.88) {
-          const rotProgress = (scrollProgress - 0.25) / 0.63;
+          var rotProgress = (scrollProgress - 0.25) / 0.63;
           targetRotationY = rotProgress * Math.PI * 2;
 
           // Update flavour info boxes as cake spins
@@ -479,19 +491,19 @@
   }
 
   // Tab click navigation to rotate directly to flavour
-  flavourTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const step = parseInt(tab.dataset.step, 10);
+  flavourTabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      var step = parseInt(tab.dataset.step, 10);
       if (!step) return;
 
-      const secRect = section.getBoundingClientRect();
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      const secTop = secRect.top + scrollTop;
-      const travel = section.offsetHeight - window.innerHeight;
+      var secRect = section.getBoundingClientRect();
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      var secTop = secRect.top + scrollTop;
+      var travel = section.offsetHeight - window.innerHeight;
 
       // Target progress for each flavour step:
-      const stepProgressMap = { 1: 0.32, 2: 0.55, 3: 0.78 };
-      const targetP = stepProgressMap[step] || 0.32;
+      var stepProgressMap = { 1: 0.32, 2: 0.55, 3: 0.78 };
+      var targetP = stepProgressMap[step] || 0.32;
 
       window.scrollTo({
         top: secTop + targetP * travel,
@@ -501,36 +513,37 @@
   });
 
   // ─── Render Loop ───
-  let clock = new THREE.Clock();
+  var clock = new THREE.Clock();
 
   function animate() {
     requestAnimationFrame(animate);
 
-    const elapsedTime = clock.getElapsedTime();
+    var elapsedTime = clock.getElapsedTime();
 
     // Smooth lerp rotation following scroll progress
     currentRotationY += (targetRotationY - currentRotationY) * 0.09;
     cakeGroup.rotation.y = currentRotationY;
 
     // ─── Camera Swoop: Top-Down to Full Side View ───
-    // At scrollProgress = 0: camera is at TOP-DOWN view (y: 6.8, z: 0.02) looking at (0, 0.08, 0)
-    // As user scrolls from 0 to 0.25: camera sweeps down to side profile (y: 0.25, z: 5.8) looking at (0, -0.15, 0)
-    const cameraT = Math.min(scrollProgress / 0.25, 1.0);
-    const smoothT = 0.5 - 0.5 * Math.cos(cameraT * Math.PI);
+    // At scrollProgress = 0: camera at (0, 7.4, 0.80) looking at (0, 0, 0.80)
+    //   → Cake top is centered in lower ~60% of screen, text sits in clean upper ivory space
+    // At scrollProgress = 0.25: camera at (0, 0.25, 6.0) looking at (0, -0.15, 0)
+    //   → Full side profile, headline has faded out
 
-    const startY = 6.8;
-    const endY = 0.25;
-    const currentCamY = startY + (endY - startY) * smoothT;
+    var cameraT = Math.min(scrollProgress / 0.25, 1.0);
+    var smoothT = 0.5 - 0.5 * Math.cos(cameraT * Math.PI); // ease-in-out
 
-    const startZ = 0.02;
-    const endZ = 5.8;
-    const currentCamZ = startZ + (endZ - startZ) * smoothT;
+    // Camera Y: 7.4 → 0.25
+    var currentCamY = 7.4 + (0.25 - 7.4) * smoothT;
+    // Camera Z: 0.80 → 6.0
+    var currentCamZ = 0.80 + (6.0 - 0.80) * smoothT;
 
     camera.position.set(0, currentCamY, currentCamZ);
 
-    // Look target smoothly transitions from top face to center of cake
-    const lookTargetY = 0.08 - smoothT * 0.23;
-    camera.lookAt(0, lookTargetY, 0);
+    // Look target: (0, 0, 0.80) → (0, -0.15, 0)
+    var lookY = 0 + (-0.15 - 0) * smoothT;
+    var lookZ = 0.80 + (0 - 0.80) * smoothT;
+    camera.lookAt(0, lookY, lookZ);
 
     // Subtle natural breathing motion
     cakeGroup.position.y = Math.sin(elapsedTime * 1.0) * 0.02;
