@@ -2083,13 +2083,13 @@ html {
 /* Opening Overlay Header (visible in top-down view, fades on scroll) */
 .hero-showcase__intro {
   position: absolute;
-  top: clamp(3.2rem, 7.5vh, 6.0rem);
+  top: clamp(5.2rem, 10.5vh, 7.2rem);
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
-  z-index: 4;
+  z-index: 10;
   pointer-events: none;
-  width: min(92%, 620px);
+  width: min(92%, 660px);
   transition: opacity 0.35s ease;
 }
 
@@ -2099,18 +2099,20 @@ html {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--caramel);
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.45rem;
   display: block;
+  text-shadow: 0 1px 8px rgba(250, 247, 242, 0.9);
 }
 
 .hero-3d__title {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 3.8vw, 3.8rem);
-  color: var(--chocolate);
-  line-height: 1.05;
+  font-size: clamp(2.1rem, 4vw, 3.8rem);
+  color: #1A110E;
+  line-height: 1.08;
   letter-spacing: -0.025em;
-  margin-bottom: 0.45rem;
+  margin-bottom: 0.5rem;
   text-wrap: balance;
+  text-shadow: 0 2px 16px rgba(250, 247, 242, 0.95);
 }
 
 .hero-3d__title em {
@@ -2120,8 +2122,10 @@ html {
 
 .hero-3d__subtitle {
   font-size: clamp(0.85rem, 1vw, 1.02rem);
-  color: var(--muted);
+  color: #5A473F;
+  font-weight: 500;
   margin-bottom: 0.8rem;
+  text-shadow: 0 1px 8px rgba(250, 247, 242, 0.9);
 }
 
 .hero-3d__scroll-cue {
