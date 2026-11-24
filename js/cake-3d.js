@@ -1,14 +1,12 @@
 /* ═══════════════════════════════════════════════════════
    CAKE ATELIER — Master 3D Artisanal Cake Engine
-   Faithful Recreation of User's Reference Photograph:
-   - Soft, pillowy, hand-frosted vanilla buttercream with artisanal spatula depth
+   Faithful Recreation of Celebration Cake with Intense Physical DEPTH:
+   - Physically sculpted horizontal spatula ridges on the cake cylinder (not flat!)
    - 16 sculpted star-piped whipped buttercream rosettes with deep fluted spiral ridges
-   - Festive artisanal confetti crown: rainbow nonpareils & sugar pearls clustered
-     around the rosette valleys matching the reference photo
-   - Bottom piped pearl shell border anchoring the cake to the porcelain pedestal
-   - Soft, diffused studio lighting — NO harsh glare, NO metallic streak, NO "steel plate"
-   - Deep tactile DEPTH and self-shadowing in every crevice
-   - Perfectly centered, commanding the screen without clipping
+   - Bottom sprinkle waterfall / cascade: 340+ colorful sprinkles pressed onto side walls
+   - Top confetti wreath: 380+ rainbow nonpareils and sugar pearls in the rosette valleys
+   - Bottom French piped star shell border on the porcelain pedestal
+   - Warm studio lighting with rim halo — white cake pops dramatically on dark background!
    ═══════════════════════════════════════════════════════ */
 
 (function () {
@@ -31,10 +29,9 @@
   var width = container.clientWidth || window.innerWidth;
   var height = container.clientHeight || window.innerHeight;
 
-  // FOV 34° provides natural food photography perspective
   const camera = new THREE.PerspectiveCamera(34, width / height, 0.1, 100);
 
-  // Initial Top-Down View: Perfectly centered directly over cake origin
+  // Top-Down View: Perfectly centered over cake origin
   camera.position.set(0, 6.4, 0.01);
   camera.lookAt(0, 0, 0);
 
@@ -47,23 +44,21 @@
   renderer.setSize(width, height);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.08;
+  renderer.toneMappingExposure = 1.10;
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
   // ─── Procedural Artisanal Frosting Bump & Texture ───
-  // Creates authentic pillowy spatula swirl depth — NOT a flat cylinder!
   function createFrostingTopTexture() {
     var c = document.createElement('canvas');
     c.width = 1024;
     c.height = 1024;
     var ctx = c.getContext('2d');
 
-    // Soft warm vanilla cream base
     ctx.fillStyle = '#FCFAF6';
     ctx.fillRect(0, 0, c.width, c.height);
 
-    // Circular turntable spatula waves (offset spatula ridges)
+    // Circular turntable spatula waves
     var centerX = 512;
     var centerY = 512;
     for (var r = 40; r < 500; r += 16) {
@@ -71,7 +66,6 @@
       ctx.strokeStyle = (r % 32 === 0) ? 'rgba(255, 255, 255, 0.45)' : 'rgba(235, 226, 214, ' + alpha + ')';
       ctx.lineWidth = 14;
       ctx.beginPath();
-      // Slightly irregular organic circle
       for (var a = 0; a <= Math.PI * 2; a += 0.1) {
         var wob = r + Math.sin(a * 5) * 4 + Math.cos(a * 3) * 3;
         var x = centerX + Math.cos(a) * wob;
@@ -83,7 +77,6 @@
       ctx.stroke();
     }
 
-    // Micro-fine frosting texture noise
     for (var i = 0; i < 6000; i++) {
       var px = Math.random() * c.width;
       var py = Math.random() * c.height;
@@ -95,7 +88,6 @@
     return tex;
   }
 
-  // Buttercream Side Wall Spatula Texture
   function createButtercreamSideTexture() {
     var c = document.createElement('canvas');
     c.width = 1024;
@@ -105,7 +97,6 @@
     ctx.fillStyle = '#FAF7F1';
     ctx.fillRect(0, 0, c.width, c.height);
 
-    // Horizontal spatula stroke ridges
     for (var y = 0; y < c.height; y += 6) {
       var wave = Math.sin(y * 0.05) * 6;
       ctx.fillStyle = (y % 12 === 0) ? 'rgba(255, 255, 255, 0.35)' : 'rgba(236, 227, 216, 0.22)';
@@ -122,9 +113,7 @@
   var frostingTopTexture = createFrostingTopTexture();
   var buttercreamSideTexture = createButtercreamSideTexture();
 
-  // ─── PBR Artisanal Materials (Soft, Velvety, Matte-Satin) ───
-
-  // 1. Pillowy Vanilla Buttercream Frosting (NO METALLIC SHINE)
+  // ─── PBR Artisanal Materials (Soft Velvety Matte-Satin) ───
   var frostingTopMaterial = new THREE.MeshStandardMaterial({
     color: 0xFDFBF7,
     map: frostingTopTexture,
@@ -134,24 +123,21 @@
     metalness: 0.0
   });
 
-  // 2. Hand-Frosted Cake Body
   var frostingBodyMaterial = new THREE.MeshStandardMaterial({
     color: 0xF9F6EE,
     map: buttercreamSideTexture,
     bumpMap: buttercreamSideTexture,
-    bumpScale: 0.035,
+    bumpScale: 0.040,
     roughness: 0.65,
     metalness: 0.0
   });
 
-  // 3. Piped Whipped Buttercream Rosettes (Soft creamy satin with depth)
   var rosetteMaterial = new THREE.MeshStandardMaterial({
     color: 0xFFFDF8,
     roughness: 0.42,
     metalness: 0.0
   });
 
-  // 4. White Porcelain Cake Stand
   var porcelainStandMaterial = new THREE.MeshStandardMaterial({
     color: 0xFCFAF7,
     roughness: 0.18,
@@ -169,7 +155,6 @@
   // ── 1. Elegant Porcelain Pedestal Cake Stand ──
   var standGroup = new THREE.Group();
 
-  // Wide beveled base foot
   var standBase = new THREE.Mesh(
     new THREE.CylinderGeometry(1.68, 1.88, 0.055, 64),
     porcelainStandMaterial
@@ -178,7 +163,6 @@
   standBase.receiveShadow = true;
   standGroup.add(standBase);
 
-  // Pedestal stem
   var standStem = new THREE.Mesh(
     new THREE.CylinderGeometry(0.32, 0.42, 0.36, 32),
     porcelainStandMaterial
@@ -187,7 +171,6 @@
   standStem.receiveShadow = true;
   standGroup.add(standStem);
 
-  // Revolving top platter
   var standPlatter = new THREE.Mesh(
     new THREE.CylinderGeometry(2.18, 2.18, 0.048, 64),
     porcelainStandMaterial
@@ -198,17 +181,62 @@
 
   cakeGroup.add(standGroup);
 
-  // ── 2. Hand-Frosted Cake Body ──
-  var cakeBody = new THREE.Mesh(
-    new THREE.CylinderGeometry(cakeRadius, cakeRadius, cakeHeight, 64),
-    frostingBodyMaterial
-  );
+  // ── 2. PHYSICALLY SCULPTED RIBBED CAKE BODY (True 3D Spatula Ridges!) ──
+  // Instead of a plain cylinder, the vertices physically ripple in radius
+  // creating deep horizontal offset-spatula grooves with chiaroscuro depth!
+  function createSculptedCakeBodyGeometry(radius, height) {
+    var radialSegments = 64;
+    var heightSegments = 32;
+    var vertices = [];
+    var uvs = [];
+    var indices = [];
+
+    for (var j = 0; j <= heightSegments; j++) {
+      var v = j / heightSegments;
+      var y = -height / 2 + v * height;
+      // Physical horizontal ridges: 7 smooth concentric waves
+      var ripple = 1.0 + 0.026 * Math.cos(v * Math.PI * 14.0) + 0.012 * Math.sin(v * Math.PI * 6.0);
+      var r = radius * ripple;
+
+      for (var i = 0; i <= radialSegments; i++) {
+        var u = (i / radialSegments) * Math.PI * 2;
+        var x = r * Math.cos(u);
+        var z = r * Math.sin(u);
+
+        vertices.push(x, y, z);
+        uvs.push(i / radialSegments, v);
+      }
+    }
+
+    var ringVertices = radialSegments + 1;
+    for (var j = 0; j < heightSegments; j++) {
+      for (var i = 0; i < radialSegments; i++) {
+        var a = j * ringVertices + i;
+        var b = (j + 1) * ringVertices + i;
+        var c = (j + 1) * ringVertices + (i + 1);
+        var d = j * ringVertices + (i + 1);
+
+        indices.push(a, b, d);
+        indices.push(b, c, d);
+      }
+    }
+
+    var geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+    geo.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2));
+    geo.setIndex(indices);
+    geo.computeVertexNormals();
+    return geo;
+  }
+
+  var sculptedBodyGeo = createSculptedCakeBodyGeometry(cakeRadius, cakeHeight);
+  var cakeBody = new THREE.Mesh(sculptedBodyGeo, frostingBodyMaterial);
   cakeBody.position.y = -0.16;
   cakeBody.castShadow = true;
   cakeBody.receiveShadow = true;
   cakeGroup.add(cakeBody);
 
-  // ── 3. Pillowy Frosting Top Disc (with physical beveled rim) ──
+  // ── 3. Pillowy Frosting Top Disc & Soft Scalloped Shoulder ──
   var topDisc = new THREE.Mesh(
     new THREE.CylinderGeometry(cakeRadius + 0.015, cakeRadius + 0.015, 0.045, 64),
     frostingTopMaterial
@@ -217,7 +245,6 @@
   topDisc.receiveShadow = true;
   cakeGroup.add(topDisc);
 
-  // Rounded soft frosting shoulder
   var frostingRim = new THREE.Mesh(
     new THREE.TorusGeometry(cakeRadius + 0.008, 0.035, 16, 64),
     frostingTopMaterial
@@ -236,16 +263,15 @@
     pearl.scale.set(1.0, 0.85, 1.25);
     pearl.rotation.y = -pAngle;
     pearl.position.set(
-      Math.cos(pAngle) * (cakeRadius + 0.012),
+      Math.cos(pAngle) * (cakeRadius + 0.014),
       -0.82,
-      Math.sin(pAngle) * (cakeRadius + 0.012)
+      Math.sin(pAngle) * (cakeRadius + 0.014)
     );
     bottomPearlGroup.add(pearl);
   }
   cakeGroup.add(bottomPearlGroup);
 
   // ── 5. SCULPTED FLUTED STAR-PIPED BUTTERCREAM ROSETTES (16 Rosettes) ──
-  // Creates genuine 3D DEPTH with deep fluted spiral ridges, crevices, and self-shadows!
   function createFlutedRosetteGeometry(baseRadius, height, flutes, twist) {
     var radialSegments = 36;
     var heightSegments = 20;
@@ -254,14 +280,12 @@
     var indices = [];
 
     for (var j = 0; j <= heightSegments; j++) {
-      var v = j / heightSegments; // 0 to 1
-      // Elegant bell-dome profile curving up to a sharp spiral peak
+      var v = j / heightSegments;
       var profile = Math.cos(v * Math.PI * 0.5);
       var y = Math.pow(v, 0.88) * height;
 
       for (var i = 0; i <= radialSegments; i++) {
         var u = (i / radialSegments) * Math.PI * 2;
-        // Deep fluted ripple with spiral twist
         var ripple = 1.0 + 0.36 * Math.cos(flutes * u + v * twist);
         var r = baseRadius * profile * ripple;
 
@@ -286,7 +310,6 @@
       }
     }
 
-    // Base cap
     var baseCenterIndex = vertices.length / 3;
     vertices.push(0, 0, 0);
     uvs.push(0.5, 0.5);
@@ -302,7 +325,6 @@
     return geo;
   }
 
-  // 16 Rosettes evenly spaced around the top rim (matching reference photo!)
   var rosetteCount = 16;
   var rosetteGeo = createFlutedRosetteGeometry(0.24, 0.32, 8, 2.4);
   var rosetteRadius = 1.48;
@@ -316,15 +338,13 @@
       topY + 0.015,
       Math.sin(rAngle) * rosetteRadius
     );
-    // Slight random rotation variation for natural organic bakery look
     rosette.rotation.y = rAngle + (Math.random() - 0.5) * 0.25;
     rosette.castShadow = true;
     rosette.receiveShadow = true;
     cakeGroup.add(rosette);
   }
 
-  // ── 6. FESTIVE ARTISANAL CONFETTI SPRINKLES (Matching Reference Photo) ──
-  // Vibrant nonpareils and sugar jimmies clustered in the rosette valleys!
+  // ── 6. CONFETTI SPRINKLES: TOP WREATH & SIDE WATERFALL CASCADE ──
   var sprinkleColors = [
     0xE6397A, // Strawberry Magenta Pink
     0x00B4D8, // Vibrant Turquoise Cyan
@@ -344,29 +364,21 @@
   });
 
   var sprinkleGroup = new THREE.Group();
-
-  // A. Nonpareils (Round spherical sugar candy beads)
   var nonpareilGeo = new THREE.SphereGeometry(0.022, 8, 8);
-  var nonpareilCount = 260;
+  var jimmyGeo = new THREE.CylinderGeometry(0.012, 0.012, 0.055, 6);
 
+  // A. Top Confetti Wreath (clustered around rosettes)
+  var nonpareilCount = 260;
   for (var ni = 0; ni < nonpareilCount; ni++) {
     var angle = Math.random() * Math.PI * 2;
-    // Density distribution: highest around rosette ring (r = 1.25 to 1.66),
-    // with some scattered playfully inward toward center (r = 0.90 to 1.25)
     var distNorm = Math.random();
-    var r;
-    if (distNorm < 0.75) {
-      r = 1.26 + Math.random() * 0.38;
-    } else {
-      r = 0.92 + Math.random() * 0.34;
-    }
+    var r = (distNorm < 0.75) ? (1.26 + Math.random() * 0.38) : (0.92 + Math.random() * 0.34);
 
     var matIndex = Math.floor(Math.random() * sprinkleMaterials.length);
     var bead = new THREE.Mesh(nonpareilGeo, sprinkleMaterials[matIndex]);
 
     var scale = 0.75 + Math.random() * 0.55;
     bead.scale.set(scale, scale, scale);
-
     bead.position.set(
       Math.cos(angle) * r,
       topY + 0.022 + Math.random() * 0.015,
@@ -376,10 +388,7 @@
     sprinkleGroup.add(bead);
   }
 
-  // B. Jimmies (Elongated cylindrical confetti sprinkles)
-  var jimmyGeo = new THREE.CylinderGeometry(0.012, 0.012, 0.055, 6);
   var jimmyCount = 120;
-
   for (var ji = 0; ji < jimmyCount; ji++) {
     var jAngle = Math.random() * Math.PI * 2;
     var jR = 1.24 + Math.random() * 0.40;
@@ -392,23 +401,57 @@
       topY + 0.022,
       Math.sin(jAngle) * jR
     );
-    // Lie flat at random organic orientations
     jimmy.rotation.x = Math.PI / 2 + (Math.random() - 0.5) * 0.3;
     jimmy.rotation.z = Math.random() * Math.PI * 2;
     jimmy.castShadow = true;
     sprinkleGroup.add(jimmy);
   }
 
+  // B. SIDE SPRINKLE WATERFALL CASCADE (Dense at base, cascading upward!)
+  var sideSprinkleCount = 360;
+  for (var si = 0; si < sideSprinkleCount; si++) {
+    var sAngle = Math.random() * Math.PI * 2;
+    // Exponential falloff upward: dense at bottom (-0.80 to -0.45), scattering up to -0.05
+    var vDist = Math.pow(Math.random(), 2.0);
+    var sy = -0.78 + vDist * 0.74;
+
+    // Radius matching the physical spatula ridges at this height
+    var vRel = (sy - (-cakeHeight / 2)) / cakeHeight;
+    var sideRipple = 1.0 + 0.026 * Math.cos(vRel * Math.PI * 14.0) + 0.012 * Math.sin(vRel * Math.PI * 6.0);
+    var sr = (cakeRadius * sideRipple) + 0.012;
+
+    var sMat = sprinkleMaterials[Math.floor(Math.random() * sprinkleMaterials.length)];
+
+    if (Math.random() > 0.42) {
+      // Nonpareil bead stuck to side wall
+      var bead = new THREE.Mesh(nonpareilGeo, sMat);
+      var bScale = 0.70 + Math.random() * 0.50;
+      bead.scale.set(bScale, bScale, bScale);
+      bead.position.set(Math.cos(sAngle) * sr, sy, Math.sin(sAngle) * sr);
+      bead.castShadow = true;
+      sprinkleGroup.add(bead);
+    } else {
+      // Jimmy sprinkle lying against side wall
+      var jimmy = new THREE.Mesh(jimmyGeo, sMat);
+      jimmy.position.set(Math.cos(sAngle) * sr, sy, Math.sin(sAngle) * sr);
+      jimmy.rotation.y = -sAngle + Math.PI / 2;
+      jimmy.rotation.x = Math.random() * Math.PI;
+      jimmy.rotation.z = (Math.random() - 0.5) * 0.8;
+      jimmy.castShadow = true;
+      sprinkleGroup.add(jimmy);
+    }
+  }
+
   cakeGroup.add(sprinkleGroup);
 
-  // ─── Studio Diffused Lighting (NO METALLIC STREAKS, SOFT APPETIZING DEPTH) ───
+  // ─── Studio Direct Lighting (Warm, Diffused, High-Contrast Against Dark Canvas) ───
 
-  // Soft warm ambient base
-  var ambientLight = new THREE.AmbientLight(0xFFF9F2, 2.2);
+  // Warm ambient base
+  var ambientLight = new THREE.AmbientLight(0xFFF7F0, 1.9);
   scene.add(ambientLight);
 
-  // Studio Key Light (diffused softbox angle casting soft shadows into rosette flutes)
-  var keyLight = new THREE.DirectionalLight(0xFFFAF0, 1.8);
+  // Studio Key Light (casts soft shadows into the rosette flutes and side ridges)
+  var keyLight = new THREE.DirectionalLight(0xFFFAF2, 2.2);
   keyLight.position.set(4.0, 7.5, 4.0);
   keyLight.castShadow = true;
   keyLight.shadow.mapSize.width = 1024;
@@ -416,19 +459,19 @@
   keyLight.shadow.bias = -0.001;
   scene.add(keyLight);
 
-  // Warm Fill Light (softens shadows from left)
-  var fillLight = new THREE.DirectionalLight(0xF6ECE0, 1.3);
+  // Warm Fill Light (softens side shadows)
+  var fillLight = new THREE.DirectionalLight(0xF6ECE0, 1.4);
   fillLight.position.set(-4.5, 5.0, 2.5);
   scene.add(fillLight);
 
-  // Overhead Diffuse Light (even, soft top-down illumination — NO harsh point glare!)
-  var topDiffuse = new THREE.DirectionalLight(0xFFF7EE, 1.2);
+  // Overhead Diffuse Light
+  var topDiffuse = new THREE.DirectionalLight(0xFFF7EE, 1.3);
   topDiffuse.position.set(0, 9.0, 0.5);
   scene.add(topDiffuse);
 
-  // Gentle Rim Light for pedestal and silhouette definition
-  var rimLight = new THREE.DirectionalLight(0xEDE5DA, 1.2);
-  rimLight.position.set(0, 3.5, -5.5);
+  // Rim Backlight (champagne halo making the white frosting pop off dark background)
+  var rimLight = new THREE.DirectionalLight(0xFFF2E6, 1.8);
+  rimLight.position.set(0, 4.0, -5.5);
   scene.add(rimLight);
 
   // ─── Responsive Camera Framing ───
@@ -544,13 +587,12 @@
 
     var elapsedTime = clock.getElapsedTime();
 
-    // Smooth lerp rotation following scroll progress
     currentRotationY += (targetRotationY - currentRotationY) * 0.09;
     cakeGroup.rotation.y = currentRotationY;
 
     // ─── Camera Swoop: Top-Down to Full Side Profile ───
     var cameraT = Math.min(scrollProgress / 0.25, 1.0);
-    var smoothT = 0.5 - 0.5 * Math.cos(cameraT * Math.PI); // ease-in-out
+    var smoothT = 0.5 - 0.5 * Math.cos(cameraT * Math.PI);
 
     var currentCamY = 6.4 + (0.35 - 6.4) * smoothT;
     var currentCamZ = 0.01 + (5.8 - 0.01) * smoothT;
@@ -559,7 +601,6 @@
     var lookY = 0 + (-0.15 - 0) * smoothT;
     camera.lookAt(0, lookY, 0);
 
-    // Subtle natural breathing float
     cakeGroup.position.y = Math.sin(elapsedTime * 1.0) * 0.016;
 
     renderer.render(scene, camera);
@@ -569,5 +610,5 @@
 
   window.addEventListener('resize', updateCameraFraming, { passive: true });
 
-  console.log('🎂 Cake Atelier — Artisanal Celebration Cake Engine Active (Ref: Photo)');
+  console.log('🎂 Cake Atelier — Physical Depth Celebration Cake Engine Active');
 })();
