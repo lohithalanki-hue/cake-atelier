@@ -5,23 +5,23 @@
 
 /* ─── Custom Properties ─── */
 :root {
-  /* Palette — refined editorial luxury per tasteskill
-     Clean porcelain ivory ground, deep cacao ink, warm caramel-gold accents */
+  /* Palette — dark luxury couture per user request
+     Deep espresso obsidian velvet ground, crisp ivory text, champagne caramel-gold accents */
   --ivory: #FAF7F2;
-  --chocolate: #201511;
-  --caramel: #C08A56;
-  --cream: #EFEAE0;
-  --burgundy: #5E2632;
+  --chocolate: #120A06;
+  --caramel: #E5A96A;
+  --cream: #1C120B;
+  --burgundy: #6E2A38;
   --warm-white: #FFFFFF;
-  --muted: #6E5D56;
-  --chocolate-light: #3D2922;
+  --muted: #A8958B;
+  --chocolate-light: #2A1B13;
 
   /* Functional tokens */
-  --bg: var(--ivory);
-  --ink: var(--chocolate);
-  --accent: var(--caramel);
-  --surface: var(--cream);
-  --highlight: var(--burgundy);
+  --bg: #120A06;
+  --ink: #FAF7F2;
+  --accent: #E5A96A;
+  --surface: #1C120B;
+  --highlight: #E5A96A;
 
   /* Type scale — modular, editorial */
   --font-display: 'Playfair Display', 'Georgia', serif;
@@ -190,9 +190,10 @@ html {
 }
 
 .nav.scrolled {
-  background: rgba(245, 240, 232, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(18, 10, 6, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(229, 169, 106, 0.16);
   padding: var(--space-sm) 0;
 }
 
@@ -2059,7 +2060,7 @@ html {
   justify-content: space-between;
   align-items: center;
   padding: clamp(1rem, 2vh, 2.2rem) clamp(1rem, 3vw, 4rem);
-  background: radial-gradient(circle at center, rgba(235, 226, 213, 0.45) 0%, rgba(245, 240, 232, 0.95) 65%, var(--bg) 100%);
+  background: radial-gradient(circle at center, #251610 0%, #170D08 55%, #0E0704 100%);
   box-sizing: border-box;
 }
 
@@ -2070,8 +2071,8 @@ html {
   transform: translate(-50%, -50%);
   font-family: var(--font-display);
   font-size: clamp(3.5rem, 12vw, 13rem);
-  color: var(--chocolate);
-  opacity: 0.038;
+  color: #FFFFFF;
+  opacity: 0.04;
   letter-spacing: 0.08em;
   white-space: nowrap;
   pointer-events: none;
@@ -2207,13 +2208,13 @@ html {
               visibility 0.5s;
   width: 100%;
   max-width: 360px;
-  background: rgba(253, 251, 247, 0.93);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(192, 138, 86, 0.28);
-  border-radius: 4px;
+  background: rgba(28, 17, 12, 0.90);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(229, 169, 106, 0.28);
+  border-radius: 6px;
   padding: clamp(1.2rem, 1.6vw, 1.65rem);
-  box-shadow: 0 20px 40px -12px rgba(32, 21, 17, 0.10);
+  box-shadow: 0 24px 50px -10px rgba(0, 0, 0, 0.70), 0 0 1px rgba(229, 169, 106, 0.35);
   pointer-events: auto;
 }
 
@@ -2235,28 +2236,40 @@ html {
 }
 
 .showcase-box__step {
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 600;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--caramel);
-  margin-bottom: 0.35rem;
+  color: #E5A96A;
+  margin-bottom: 0.4rem;
   display: block;
 }
 
 .showcase-box__title {
   font-family: var(--font-display);
   font-size: clamp(1.15rem, 1.4vw, 1.5rem);
-  color: var(--chocolate);
+  color: #FFFDF9;
   line-height: 1.25;
   margin-bottom: 0.5rem;
 }
 
 .showcase-box__desc {
   font-size: clamp(0.82rem, 0.88vw, 0.92rem);
-  color: var(--muted);
+  color: #D8C8BF;
   line-height: 1.6;
   margin-bottom: 0.85rem;
+}
+
+.meta-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.65rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  border-radius: 100px;
+  background: rgba(229, 169, 106, 0.12);
+  color: #E5A96A;
+  border: 1px solid rgba(229, 169, 106, 0.26);
 }
 
 .showcase-box__meta {
@@ -2315,6 +2328,22 @@ html {
 
 .flavour-tab.active .tab-dot {
   transform: scale(1.4);
+  background: #E5A96A;
+  box-shadow: 0 0 10px rgba(229, 169, 106, 0.7);
+}
+
+.tab-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #B4A297;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.flavour-tab.active .tab-label {
+  color: #FFFDF9;
+}
 }
 
 .tab-label {
