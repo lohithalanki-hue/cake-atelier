@@ -2080,7 +2080,7 @@ html {
   font-style: italic;
 }
 
-/* Opening Overlay Header (visible in top-down view over the chocolate glaze, fades on scroll) */
+/* Opening Overlay Header (centered over the pillowy vanilla frosting, fades on scroll) */
 .hero-showcase__intro {
   position: absolute;
   top: 50%;
@@ -2089,45 +2089,45 @@ html {
   text-align: center;
   z-index: 10;
   pointer-events: none;
-  width: min(92%, 640px);
+  width: min(88%, 560px);
   transition: opacity 0.35s ease;
 }
 
 .hero-3d__label {
   font-size: var(--text-xs);
   font-weight: 600;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: #F5D6A4;
+  color: #7D553E;
   margin-bottom: 0.65rem;
   display: block;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85), 0 1px 3px rgba(0, 0, 0, 0.95);
+  text-shadow: 0 1px 12px rgba(255, 255, 255, 0.95);
 }
 
 .hero-3d__title {
   font-family: var(--font-display);
   font-size: clamp(2.3rem, 4.4vw, 4.0rem);
-  color: #FFFDF9;
+  color: #1A0F0B;
   line-height: 1.08;
   letter-spacing: -0.025em;
   margin-bottom: 0.65rem;
   text-wrap: balance;
-  text-shadow: 0 3px 20px rgba(0, 0, 0, 0.9), 0 1px 4px rgba(0, 0, 0, 0.95);
+  text-shadow: 0 2px 16px rgba(255, 255, 255, 0.95), 0 0 4px rgba(255, 255, 255, 0.8);
 }
 
 .hero-3d__title em {
   font-style: italic;
-  color: #FCD89C;
-  text-shadow: 0 3px 20px rgba(0, 0, 0, 0.9), 0 0 25px rgba(252, 216, 156, 0.4);
+  color: #A85B28;
+  text-shadow: 0 2px 16px rgba(255, 255, 255, 0.95);
 }
 
 .hero-3d__subtitle {
   font-size: clamp(0.88rem, 1.05vw, 1.05rem);
-  color: #F4EAE0;
-  font-weight: 400;
+  color: #5A4237;
+  font-weight: 500;
   letter-spacing: 0.02em;
   margin-bottom: 0.85rem;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85);
+  text-shadow: 0 1px 12px rgba(255, 255, 255, 0.95);
 }
 
 .hero-3d__scroll-cue {
@@ -2138,8 +2138,8 @@ html {
 
 .cue-icon {
   font-size: 1.35rem;
-  color: #FCD89C;
-  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.95));
+  color: #A85B28;
+  filter: drop-shadow(0 1px 6px rgba(255, 255, 255, 0.9));
   animation: cueBob 1.8s ease-in-out infinite;
 }
 
