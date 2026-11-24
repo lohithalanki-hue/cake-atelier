@@ -30,13 +30,12 @@
   var width = container.clientWidth || window.innerWidth;
   var height = container.clientHeight || window.innerHeight;
 
-  const camera = new THREE.PerspectiveCamera(36, width / height, 0.1, 100);
+  const camera = new THREE.PerspectiveCamera(30, width / height, 0.1, 100);
 
-  // Initial Top-Down viewpoint — offset along +Z so cake sits in the
-  // LOWER 60% of the screen, leaving the top 40% as clean warm ivory
-  // ground where the headline text sits with zero overlap on dark cake.
-  camera.position.set(0, 7.4, 0.80);
-  camera.lookAt(0, 0, 0.80);
+  // Initial Top-Down viewpoint — CENTERED directly above the cake.
+  // Text is white/gold over the dark chocolate top, perfectly readable.
+  camera.position.set(0, 5.5, 0.01);
+  camera.lookAt(0, 0, 0);
 
   const renderer = new THREE.WebGLRenderer({
     canvas: canvas,
@@ -53,22 +52,24 @@
 
   // ─── PBR Artisanal Materials (Matching User Photos 2 & 3) ───
 
-  // 1. Rich Valrhona Dark Chocolate Mirror Glaze — warm, mouth-watering,
-  //    with high clearcoat for that liquid-glass editorial sheen
+  // 1. Rich Valrhona Dark Chocolate Mirror Glaze — warm, liquid-glass sheen
+  //    Warmer base so it reads as chocolate (not black rubber) under any lighting
   var chocolateGlazeMaterial = new THREE.MeshPhysicalMaterial({
-    color: 0x24120B,
-    roughness: 0.12,
-    metalness: 0.04,
-    clearcoat: 0.95,
-    clearcoatRoughness: 0.05,
-    reflectivity: 0.90
+    color: 0x3A1D10,
+    roughness: 0.10,
+    metalness: 0.03,
+    clearcoat: 1.0,
+    clearcoatRoughness: 0.04,
+    reflectivity: 0.92,
+    emissive: 0x0A0503,
+    emissiveIntensity: 0.15
   });
 
-  // 2. Creamy Vanilla Speckled Buttercream (Photo 3)
+  // 2. Creamy Vanilla Speckled Buttercream (Photo 3) — warm, inviting cream tone
   var buttercreamMaterial = new THREE.MeshStandardMaterial({
-    color: 0xF7F3E9,
-    roughness: 0.44,
-    metalness: 0.02
+    color: 0xF5EFE0,
+    roughness: 0.38,
+    metalness: 0.01
   });
 
   // 3. Clean White Porcelain Cake Pedestal Stand (Photo 3)
@@ -78,11 +79,11 @@
     metalness: 0.04
   });
 
-  // 4. Fresh Ripe Blueberries with frosted bloom (Photo 2)
+  // 4. Fresh Ripe Blueberries with frosted bloom (Photo 2) — richer indigo-purple
   var blueberryMaterial = new THREE.MeshStandardMaterial({
-    color: 0x222A42,
-    roughness: 0.36,
-    metalness: 0.06
+    color: 0x2A2550,
+    roughness: 0.32,
+    metalness: 0.08
   });
 
   // 5. Glistening Fresh Blackberries (Photo 2)
@@ -366,12 +367,12 @@
 
   // ─── Studio Lighting (Warm, Soft & High-Contrast — No Harsh PointLight) ───
 
-  // Soft warm ambient fill
-  var ambientLight = new THREE.AmbientLight(0xFFF6EA, 1.9);
+  // Soft warm ambient fill — generous to prevent dead-black areas
+  var ambientLight = new THREE.AmbientLight(0xFFF6EA, 2.4);
   scene.add(ambientLight);
 
   // Studio Key Light — broad diagonal gleam across mirror glaze (upper-right-front)
-  var keyLight = new THREE.DirectionalLight(0xFFFAF2, 2.8);
+  var keyLight = new THREE.DirectionalLight(0xFFFAF2, 3.0);
   keyLight.position.set(4.5, 9.0, 5.0);
   keyLight.castShadow = true;
   keyLight.shadow.mapSize.width = 1024;
@@ -390,12 +391,17 @@
   // a broad, soft top HemisphereLight for even warmth.
 
   // Broad soft hemisphere light — simulates studio bounce ceiling
-  var hemiLight = new THREE.HemisphereLight(0xFFF8EE, 0xE8D6C0, 1.6);
+  var hemiLight = new THREE.HemisphereLight(0xFFF8EE, 0xE8D6C0, 1.8);
   hemiLight.position.set(0, 6, 0);
   scene.add(hemiLight);
 
+  // Soft overhead directional for top-down glaze gleam (not a point light!)
+  var topSoft = new THREE.DirectionalLight(0xFFF5E6, 2.0);
+  topSoft.position.set(0.5, 8, 0.5);
+  scene.add(topSoft);
+
   // Subtle Backlight for rim definition
-  var rimLight = new THREE.DirectionalLight(0xEDE2D4, 1.8);
+  var rimLight = new THREE.DirectionalLight(0xEDE2D4, 2.0);
   rimLight.position.set(0, 3.0, -6.0);
   scene.add(rimLight);
 
@@ -408,9 +414,9 @@
 
     // Responsive FOV: expands on portrait/narrow mobile screens so cake is never cut off
     if (aspect < 1.0) {
-      camera.fov = 36 / aspect;
+      camera.fov = 30 / aspect;
     } else {
-      camera.fov = 36;
+      camera.fov = 30;
     }
 
     camera.updateProjectionMatrix();
@@ -525,25 +531,22 @@
     cakeGroup.rotation.y = currentRotationY;
 
     // ─── Camera Swoop: Top-Down to Full Side View ───
-    // At scrollProgress = 0: camera at (0, 7.4, 0.80) looking at (0, 0, 0.80)
-    //   → Cake top is centered in lower ~60% of screen, text sits in clean upper ivory space
-    // At scrollProgress = 0.25: camera at (0, 0.25, 6.0) looking at (0, -0.15, 0)
-    //   → Full side profile, headline has faded out
+    // At scrollProgress = 0: camera at (0, 5.5, 0.01) — CENTERED directly above
+    // At scrollProgress = 0.25: camera at (0, 0.25, 5.2) — full side profile
 
     var cameraT = Math.min(scrollProgress / 0.25, 1.0);
     var smoothT = 0.5 - 0.5 * Math.cos(cameraT * Math.PI); // ease-in-out
 
-    // Camera Y: 7.4 → 0.25
-    var currentCamY = 7.4 + (0.25 - 7.4) * smoothT;
-    // Camera Z: 0.80 → 6.0
-    var currentCamZ = 0.80 + (6.0 - 0.80) * smoothT;
+    // Camera Y: 5.5 → 0.25
+    var currentCamY = 5.5 + (0.25 - 5.5) * smoothT;
+    // Camera Z: 0.01 → 5.2
+    var currentCamZ = 0.01 + (5.2 - 0.01) * smoothT;
 
     camera.position.set(0, currentCamY, currentCamZ);
 
-    // Look target: (0, 0, 0.80) → (0, -0.15, 0)
+    // Look target: (0, 0, 0) → (0, -0.15, 0)
     var lookY = 0 + (-0.15 - 0) * smoothT;
-    var lookZ = 0.80 + (0 - 0.80) * smoothT;
-    camera.lookAt(0, lookY, lookZ);
+    camera.lookAt(0, lookY, 0);
 
     // Subtle natural breathing motion
     cakeGroup.position.y = Math.sin(elapsedTime * 1.0) * 0.02;
